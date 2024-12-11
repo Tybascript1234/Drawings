@@ -98,7 +98,6 @@ ion-icon::before {
     .content1 {
         width: var(--width-2);
         position: relative;
-        overflow: auto;
     }
     .content1-list {
         width: var(--width-2);
