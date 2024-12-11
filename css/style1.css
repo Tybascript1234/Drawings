@@ -101,14 +101,17 @@ ion-icon::before {
         overflow: hidden;
     }
     .content1-list {
-        width: var(--width);
+        width: var(--width-2);
         height: 48px;
-        border-bottom: solid 1px #e9e9e9;
+        /* border-bottom: solid 1px #e9e9e9; */
         display: flex;
         align-items: center;
         background: white;
         position: relative;
         z-index: 120;
+        position: fixed;
+        top: 0;
+        margin-right: 78px;
     }
     .content1-list div {
         height: var(--height);
@@ -130,12 +133,16 @@ ion-icon::before {
         font-size: 22px;
     }
     .content1-div {
-        width: var(--width);
-        height: var(--height-2);
+        width: var(--width-2);
+        height: -webkit-fill-available;
         display: var(--display-flex);
-        padding-top: 69px;
+        align-items: center;
+        margin-top: 48px;
         background-color: #f3f6fb;
         justify-content: center;
+        border-top: solid 1px #e9e9e9;
+        border-right: solid 1px #e9e9e9;
+        border-radius: 0px 15px 0px 0px;
     }
     .window {
         flex: 1 1 auto;
@@ -157,11 +164,13 @@ ion-icon::before {
 
 /* content2 */
     .content2 {
-        position: relative;
+        position: sticky;
         padding: 10px 0;
         width: 79px;
-        border-left: solid 1px #e9e9e9;
+        /* border-right: solid 1px #e9e9e9; */
         text-align: -webkit-center;
+        top: 0;
+        height: -webkit-fill-available;
     }
     .button1 {
         transition: ease 0.2s;
