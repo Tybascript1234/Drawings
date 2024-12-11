@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawings</title>
+    <!-- link-css -->
+     <link rel="stylesheet" href="css/style1.css">
+     <link rel="stylesheet" href="css/screen.css">
+    <!-- link-js -->
+     <script src="script/script1.js"></script>
+    <!-- link-icon -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=history" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+</head>
+<body>
+    <div class="content">
+        <!-- 1 -->
+            <div class="content1">
+                <div class="content1-list">
+                    <div class="filter"><button class="flex zo"><ion-icon name="filter-outline"></ion-icon></button></div>
+                    <button class="back"><ion-icon name="caret-back-outline"></ion-icon></button>
+                    <div class="window"></div>
+                    <button class="back"><ion-icon name="caret-forward-outline"></ion-icon></button>
+                    <div class="back-button">
+                        <button class="zo" onclick="undo()"><ion-icon name="arrow-back-outline"></ion-icon></button>
+                        <button class="zo" onclick="redo()"><ion-icon name="arrow-forward-outline"></ion-icon></button>
+                        <button class="zo" id="resetCanvasBtn"><i class="fi fi-br-rotate-right"></i></button>
+                    </div>
+                </div>
+                <div class="content1-div">
+                    <div id="canvas-container" width="1201px" style="position: relative; height: max-content; display: flex ; justify-content: center;">
+                        <canvas id="canvas" width="1200px" height="744px" style="border: solid 1px #ccc;max-width: 100%;"></canvas>
+                        <div style="top: 50%; transform: translateX(-50%); position: absolute; left: -29px;">
+                            <span style="position: absolute; transform: rotate(90deg);width: max-content;">745px</span>
+                        </div>
+                        <span style="position: absolute; bottom: -20px; margin: auto;">1201px</span>
+                    </div>
+                    
+                </div>
+
+                <!-- 1 -->
+                <div class="history-div box" id="box1"><div id="shapesContainer"></div></div>
+
+                <!-- 2 -->
+                <div class="history-div box" id="box2" style="width: auto;"><div id="lockedItemsContainer"></div></div>
+
+                <!-- 3 -->
+                <div class="history-div box" id="box3">
+                    <label for="textColor" class="Edit"><a>Edit</a><span>لون النص</span></label>
+                    <input type="color" class="haden" id="textColor" value="#000000" onchange="changeTextColor()"/>
+                    <label for="shapeColor" class="Edit"><a>Edit</a><span>لون الشكل</span></label>
+                    <input type="color" class="haden" id="shapeColor" value="#ff0000" onchange="changeShapeColor()"/>
+                    <label onclick="changeColor()" class="Edit"><a>Edit</a><span>لون الخلفية</span></label>
+                    <g></g>
+                    <label for="shapeOpacity" class="Edit"><a><input type="range" id="shapeOpacity" min="0" max="1" step="0.01" value="1" onchange="changeShapeOpacity()"/></a><span>شفافية الشكل</span></label>
+                    <label onclick="changeOpacity()" class="Edit"><a>Edit</a><span>شفافية الخلفية</span></label>
+                    <g></g>
+                    <div class="Edit">
+                        <select class="input" id="textAlign" onchange="changeTextAlignment()">
+                            <option value="left">يسار</option>
+                            <option value="center">منتصف</option>
+                            <option value="right">يمين</option>
+                        </select>
+                        <span>محاذاة النص</span>
+                    </div>
+                    <label for="" class="Edit"><input class="input" type="number" id="textSize" value="20" min="10" max="100" onchange="changeTextSize()"/><span>حجم النص</span></label>
+                    <g></g>
+                    <label onclick="lock()" class="Edit"><a>Edit</a><span>اضافة قفل</span></label>
+                    <label onclick="unlock()" class="Edit" style="display: none;"><a style="color: rgb(245, 63, 63);">Delete</a><span>الغاء قفل</span></label>
+                </div>
+
+                <!-- 4 -->
+                <div class="history-div box" id="box4">
+                    <label for="upload" class="Edit"><a>Add</a><span>اضف صورة</span></label>
+                    <input type="file" class="haden" id="upload" accept="image/*" />
+                    <label onclick="addText()" class="Edit"><a>Add</a><span>اضف نص</span></label>
+                    <label onclick="addShadow()" for="" class="Edit"><a>Add</a><span>اضف ظل</span></label>
+                    <g></g>
+                    <label onclick="removeShadow()" for="" class="Edit"><a>Ok</a><span>ازالة الظل</span></label>
+                </div>
+                
+                <!-- 5 -->
+                <div class="history-div box" id="box5">
+                    <label class="Edit" onclick="downloadAsPSD()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/512px-Adobe_Photoshop_CC_icon.svg.png?20200616073617" alt=""></label>
+                    <label class="Edit" onclick="downloadAsPremiere()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/2101px-Adobe_Premiere_Pro_CC_icon.svg.png" alt=""></label>
+                    <label class="Edit" onclick="downloadAsImage()"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/9205/9205302.png" alt=""></label>
+                </div>
+
+                <!-- 6 -->
+                <div class="history-div box" id="acuonts">
+                    <div class="Edit acuont-div"><a>تسجيل الدخول</a><div class="acuont"><span class="logen"><span></span></span></div></div>
+                    <g></g>
+                    <label class="Edit" id="enableAutoSave"><a>Ok</a><span>تفعيل الحفظ التلقائي</span></label>
+                    <label class="Edit" id="disableAutoSave"><a style="color: rgb(243, 48, 48);">Cancel</a><span>الغاء الحفظ التلقائي</span></label>
+                </div>
+            </div>
+
+        <!-- 2 -->
+            <div class="content2">
+                <button class="flex button1 zo" id="acuont"><span class="logen"><span></span></span></button>
+                <button class="flex button1 zo" id="toggleBtn4" style="font-size: 24px;"><ion-icon name="add-outline"></ion-icon></button>
+                <button class="flex button1 zo" onclick="duplicate()"><ion-icon name="copy-outline"></ion-icon></button>
+                <button class="flex button1 zo" id="toggleBtn3"><ion-icon name="brush-outline"></ion-icon></button>
+                <button class="flex button1 zo" id="toggleBtn1"><ion-icon name="shapes-outline"></ion-icon></button>
+                <button class="flex button1 zo" id="toggleBtn5"><ion-icon name="download-outline"></ion-icon></button>
+                <button class="flex button1 zo" id="toggleBtn2"><span class="material-symbols-outlined"> history </span></button>
+                <button class="flex button1 zo" onclick="deleteObjects()"><ion-icon name="trash-outline"></ion-icon></button>
+            </div>
+    </div>
+
+
+    <script>
+        const canvas = new fabric.Canvas('canvas');
+    let undoHistory = [];
+    let redoHistory = [];
+
+    // رفع الصورة
+    // رفع الصورة
+document.getElementById('upload').addEventListener('change', function (e) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        fabric.Image.fromURL(event.target.result, function (img) {
+            canvas.clear();
+
+            // إضافة الصورة بحجمها الأصلي
+            canvas.add(img);
+            canvas.centerObject(img);  // لضبط الصورة في منتصف الـ canvas
+            img.setCoords();
+        });
+    };
+    reader.readAsDataURL(e.target.files[0]);
+});
+
+
+// تمكين سحب وإفلات الصورة
+const canvasContainer = document.getElementById('canvas-container');
+
+// إضافة حدث السحب
+canvasContainer.addEventListener('dragover', function (e) {
+    e.preventDefault();  // منع التصرف الافتراضي للسحب (لا يسمح بإفلات الملفات)
+});
+
+canvasContainer.addEventListener('drop', function (e) {
+    e.preventDefault();  // منع التصرف الافتراضي (مثل فتح الملف)
+
+    const file = e.dataTransfer.files[0];  // الحصول على الملف الذي تم سحبه
+    if (file && file.type.startsWith('image/')) {  // التحقق من أن الملف صورة
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            fabric.Image.fromURL(event.target.result, function (img) {
+                canvas.clear();  // مسح الـ Canvas قبل إضافة الصورة
+
+                // إضافة الصورة بحجمها الأصلي
+                canvas.add(img);
+
+                // وضع الصورة في منتصف الـ Canvas
+                img.set({
+                    left: (canvas.width - img.width) / 2,
+                    top: (canvas.height - img.height) / 2
+                });
+
+                img.setCoords();  // تحديث الإحداثيات
+                canvas.renderAll();  // إعادة رسم الـ Canvas
+            });
+        };
+        reader.readAsDataURL(file);  // قراءة الملف كـ URL
+    } else {
+        alert("يرجى سحب صورة فقط.");
+    }
+});
+
+    // أدوات التعديل
+    function addText() {
+        const text = new fabric.Textbox('نص جديد', {
+            left: 50,
+            top: 50,
+            fontSize: 20,
+            fill: '#000',
+            textAlign: 'left'
+        });
+        canvas.add(text);
+        saveState();
+    }
+
+    function changeColor() {
+        const color = prompt('اختر لون الخلفية (مثال: red, #00ff00):', '#ffffff');
+        canvas.setBackgroundColor(color, canvas.renderAll.bind(canvas));
+        saveState();
+    }
+
+    function resize() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            const newWidth = parseInt(prompt("أدخل العرض الجديد:", activeObject.width)) || activeObject.width;
+            const newHeight = parseInt(prompt("أدخل الارتفاع الجديد:", activeObject.height)) || activeObject.height;
+            activeObject.scaleToWidth(newWidth);
+            activeObject.scaleToHeight(newHeight);
+            canvas.renderAll();
+            saveState();
+        } else {
+            alert("اختر عنصراً لتغيير حجمه!");
+        }
+    }
+
+    function changeOpacity() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            let opacity = parseFloat(prompt("أدخل نسبة الشفافية (0 إلى 1):", activeObject.opacity));
+            if (isNaN(opacity) || opacity < 0 || opacity > 1) {
+                alert("الرجاء إدخال قيمة صالحة بين 0 و 1.");
+                return;
+            }
+            activeObject.set('opacity', opacity);
+            canvas.renderAll();
+            saveState();
+        } else {
+            alert("اختر عنصراً لتغيير شفافيته!");
+        }
+    }
+
+    function addShadow() {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+        // طلب القيم من المستخدم
+        const shadowColor = prompt('اختر لون الظل (مثال: rgba(0,0,0,0.5)):', 'rgba(0,0,0,0.5)');
+        const shadowBlur = parseInt(prompt('أدخل سماكة الظل (الضبابية):', '10')) || 10;
+        const shadowOffsetX = parseInt(prompt('أدخل اتجاه الظل في المحور X (المسافة الأفقية):', '5')) || 5;
+        const shadowOffsetY = parseInt(prompt('أدخل اتجاه الظل في المحور Y (المسافة الرأسية):', '5')) || 5;
+
+        // تعيين الظل باستخدام القيم المدخلة
+        activeObject.set('shadow', {
+            color: shadowColor,
+            blur: shadowBlur,
+            offsetX: shadowOffsetX,
+            offsetY: shadowOffsetY
+        });
+        
+        canvas.renderAll();
+        saveState();
+    } else {
+        alert("اختر عنصراً لإضافة ظل له!");
+    }
+}
+
+      // إزالة الظل
+      function removeShadow() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            activeObject.set('shadow', null);
+            canvas.renderAll();
+            saveState();
+        } else {
+            alert("اختر عنصراً لإزالة الظل منه!");
+        }
+    }
+
+    function duplicate() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            activeObject.clone(function (cloned) {
+                cloned.set({ left: activeObject.left + 50, top: activeObject.top + 50 });
+                canvas.add(cloned);
+                saveState();
+            });
+        } else {
+            alert("اختر عنصراً لنسخه!");
+        }
+    }
+
+// إضافة دالة لإغلاق العنصر
+function lock() {
+const activeObject = canvas.getActiveObject();
+if (activeObject) {
+    // التحقق مما إذا كان العنصر مغلقًا بالفعل
+    if (activeObject.selectable === false) {
+        alert("العنصر مغلق بالفعل!");
+    } else {
+        const lockDate = new Date().toLocaleString();  // الحصول على التاريخ والوقت الحالي
+
+        // قفل العنصر
+        activeObject.set({
+            lockMovementX: true,
+            lockMovementY: true,
+            lockRotation: true,
+            lockScalingX: true,
+            lockScalingY: true,
+            selectable: false, // منع التحديد
+            evented: false // منع التفاعل
+        });
+
+        // إضافة العنصر المغلق إلى الديف
+        addLockedItemToHistory(activeObject, lockDate);
+
+        canvas.renderAll();
+        saveState();
+    }
+} else {
+    alert("اختر عنصراً لقفله!");
+}
+}
+
+// إضافة العنصر المغلق إلى التاريخ في الديف
+function addLockedItemToHistory(object, lockDate) {
+const lockedItemsContainer = document.getElementById('lockedItemsContainer');
+
+// إنشاء div جديد لكل عنصر مغلق
+const itemDiv = document.createElement('div');
+itemDiv.classList.add('locked-item');
+
+// إضافة التاريخ والاسم وزر إلغاء القفل
+const itemText = document.createElement('span');
+itemText.textContent = `عنصر مغلق في: ${lockDate}`;
+
+const unlockButton = document.createElement('button');
+unlockButton.innerHTML = '<ion-icon name="close-outline"></ion-icon>';
+unlockButton.onclick = function () {
+    unlockItem(object, itemDiv);  // إلغاء القفل عند الضغط
+};
+
+// إضافة الكلاسات
+unlockButton.classList.add('flex', 'button1', 'zo');
+
+
+itemDiv.appendChild(itemText);
+itemDiv.appendChild(unlockButton);
+lockedItemsContainer.appendChild(itemDiv);
+}
+
+// دالة لإلغاء قفل العنصر
+function unlockItem(object, itemDiv) {
+if (object) {
+    object.set('lockMovementX', false);
+    object.set('lockMovementY', false);
+    object.set('lockRotation', false);
+    object.set('lockScalingX', false);
+    object.set('lockScalingY', false);
+    object.set('selectable', true); // تمكين التحديد
+    object.set('evented', true); // تمكين التفاعل
+    canvas.renderAll();
+    saveState();
+
+    // إخفاء العنصر من التاريخ بعد إلغاء قفله
+    itemDiv.style.display = 'none';
+}
+}
+
+    function deleteObjects() {
+        const activeObjects = canvas.getActiveObjects();
+        if (activeObjects.length > 0) {
+            activeObjects.forEach(object => canvas.remove(object));
+            saveState();
+        } else {
+            alert("اختر العناصر التي تريد حذفها!");
+        }
+    }
+
+    // حفظ الحالة الحالية
+    function saveState() {
+        undoHistory.push(canvas.toJSON());
+        redoHistory = []; // عند حفظ حالة جديدة، يتم مسح ال Redo History
+    }
+
+    // تنزيل كصورة
+    function downloadAsImage() {
+        const dataURL = canvas.toDataURL({ format: 'png' });
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'canvas-image.png';
+        link.click();
+    }
+
+    // تنزيل كملف فوتوشوب (PSD)
+    function downloadAsPSD() {
+        alert('تنزيل كملف فوتوشوب يتطلب مكتبة خاصة لتحويل البيانات إلى PSD. يمكنك استخدام مكتبات مثل psd.js.');
+    }
+
+    // تنزيل كملف أدوبي بريمير
+    function downloadAsPremiere() {
+        alert('تنزيل كملف أدوبي بريمير يتطلب تنسيق XML مناسب. يمكنك استخدام مكتبات أو حلول برمجية لتصدير هذا النوع من الملفات.');
+    }
+
+    // العودة للتعديل السابق (Undo)
+    function undo() {
+        if (undoHistory.length > 0) {
+            const lastState = undoHistory.pop();
+            redoHistory.push(canvas.toJSON());
+            canvas.loadFromJSON(lastState, function () {
+                canvas.renderAll();
+            });
+        } else {
+            alert("لا يمكن العودة للتعديل السابق!");
+        }
+    }
+
+    // التحديث الجديد (Redo)
+    function redo() {
+        if (redoHistory.length > 0) {
+            const nextState = redoHistory.pop();
+            undoHistory.push(canvas.toJSON());
+            canvas.loadFromJSON(nextState, function () {
+                canvas.renderAll();
+            });
+        } else {
+            alert("لا يوجد تحديث جديد!");
+        }
+    }
+
+    // تغيير محاذاة النص
+    function changeTextAlignment() {
+        const alignment = document.getElementById('textAlign').value;
+        const activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === 'textbox') {
+            activeObject.set('textAlign', alignment);
+            canvas.renderAll();
+            saveState();
+        }
+    }
+
+    // تغيير حجم النص
+    function changeTextSize() {
+        const size = parseInt(document.getElementById('textSize').value) || 20;
+        const activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === 'textbox') {
+            activeObject.set('fontSize', size);
+            canvas.renderAll();
+            saveState();
+        }
+    }
+
+    // تغيير لون النص
+    function changeTextColor() {
+        const color = document.getElementById('textColor').value;
+        const activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === 'textbox') {
+            activeObject.set('fill', color);
+            canvas.renderAll();
+            saveState();
+        }
+    }
+
+    // تغيير لون الشكل
+    function changeShapeColor() {
+const color = document.getElementById('shapeColor').value;
+const activeObject = canvas.getActiveObject();
+if (activeObject) {
+    if (activeObject.set) {
+        activeObject.set('fill', color);  // تغيير اللون إذا كان الكائن يدعم ذلك
+        if (activeObject.type === 'line') {
+            activeObject.set('stroke', color);  // تغيير اللون للخطوط (stroke)
+        }
+        canvas.renderAll();
+        saveState();
+    }
+} else {
+    alert("اختر عنصراً لتغيير لونه!");
+}
+}
+
+
+    // تغيير شفافية الشكل
+    function changeShapeOpacity() {
+        const opacity = parseFloat(document.getElementById('shapeOpacity').value);
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            activeObject.set('opacity', opacity);
+            canvas.renderAll();
+            saveState();
+        }
+    }
+
+    // إنشاء الأشكال
+    function initializeShapes() {
+        const shapesContainer = document.getElementById('shapesContainer');
+        const shapes = [
+             new fabric.Circle({ radius: 15, fill: 'rgb(95 99 104)' }), // دائرة
+    new fabric.Rect({ width: 30, height: 30, fill: 'rgb(95 99 104)' }), // مربع
+    new fabric.Triangle({ width: 30, height: 30, fill: 'rgb(95 99 104)' }), // مثلث
+    new fabric.Ellipse({ rx: 15, ry: 15, fill: 'rgb(95 99 104)' }), // بيضاوي
+    new fabric.Polygon([{ x: 0, y: 0 }, { x: 30, y: 0 }, { x: 15, y: 30 }], { fill: 'rgb(95 99 104)' }), // مثلث مائل
+    new fabric.Polygon([{ x: 0, y: 0 }, { x: 15, y: 0 }, { x: 7.5, y: 22.5 }], { fill: 'rgb(95 99 104)' }), // مثلث صغير
+    new fabric.Polygon([{ x: 0, y: 0 }, { x: 22.5, y: 0 }, { x: 11.25, y: 11.25 }], { fill: 'rgb(95 99 104)' }), // مثلث مائل آخر
+    new fabric.Line([0, 0, 30, 30], { stroke: 'rgb(95 99 104)' }), // خط
+    new fabric.Polygon([{ x: 7.5, y: 7.5 }, { x: 30, y: 10 }, { x: 22.5, y: 30 }], { fill: 'rgb(95 99 104)' }), // مثلث مختلف
+    new fabric.Rect({ width: 30, height: 30, fill: 'rgb(95 99 104)' }), // مستطيل
+    new fabric.Circle({ radius: 15, fill: 'rgb(95 99 104)' }), // دائرة أخرى
+
+    // الأشكال الجديدة:
+    new fabric.Polygon([{ x: 15, y: 0 }, { x: 18, y: 7.5 }, { x: 30, y: 7.5 }, { x: 21, y: 12.5 }, { x: 24, y: 20 }, { x: 15, y: 15 }, { x: 6, y: 20 }, { x: 9, y: 12.5 }, { x: 0, y: 7.5 }, { x: 12, y: 7.5 }], { fill: 'rgb(95 99 104)' }), // نجم
+    new fabric.Polygon([{ x: 10, y: 0 }, { x: 30, y: 15 }, { x: 15, y: 25 }, { x: 0, y: 15 }], { fill: 'rgb(95 99 104)' }), // شكل رباعي مائل
+    new fabric.Polygon([{ x: 0, y: 0 }, { x: 10, y: 10 }, { x: 5, y: 20 }, { x: 0, y: 15 }], { fill: 'rgb(95 99 104)' }), // شبه منحرف
+    new fabric.Polygon([{ x: 5, y: 0 }, { x: 25, y: 0 }, { x: 30, y: 20 }, { x: 0, y: 20 }], { fill: 'rgb(95 99 104)' }), // مستطيل مع زاوية حادة
+    new fabric.Polygon([{ x: 0, y: 0 }, { x: 15, y: 0 }, { x: 20, y: 15 }, { x: 10, y: 20 }, { x: 0, y: 15 }], { fill: 'rgb(95 99 104)' }), // شكل خماسي
+    new fabric.Polygon([{ x: 0, y: 0 }, { x: 5, y: 20 }, { x: 25, y: 20 }, { x: 30, y: 0 }], { fill: 'rgb(95 99 104)' }), // شكل مائل آخر
+    new fabric.Polygon([{ x: 15, y: 0 }, { x: 18, y: 5 }, { x: 30, y: 5 }, { x: 20, y: 12 }, { x: 22, y: 20 }, { x: 15, y: 15 }], { fill: 'rgb(95 99 104)' }), // شكل متعدد الأضلاع
+    new fabric.Rect({ width: 30, height: 15, fill: 'rgb(95 99 104)' }), // مستطيل صغير
+    new fabric.Line([0, 0, 15, 30], { stroke: 'rgb(95 99 104)' }),
+        ];
+
+        shapes.forEach(shape => {
+            const previewCanvas = document.createElement('canvas');
+            previewCanvas.width = 30;
+            previewCanvas.height = 30;
+            previewCanvas.className = 'shape-preview';
+            const previewCtx = new fabric.StaticCanvas(previewCanvas);
+            previewCtx.add(shape);
+
+            previewCanvas.addEventListener('click', () => {
+                const clone = fabric.util.object.clone(shape);
+                clone.set({ left: 100, top: 100 });
+                canvas.add(clone);
+                saveState();
+            });
+
+            shapesContainer.appendChild(previewCanvas);
+        });
+    }
+
+
+
+    let isAutoSaveEnabled = false; // حالة الحفظ التلقائي
+
+// تفعيل الحفظ التلقائي
+document.getElementById('enableAutoSave').addEventListener('click', function () {
+    isAutoSaveEnabled = true;
+    localStorage.setItem('autoSaveEnabled', true);
+    alert("تم تفعيل الحفظ التلقائي.");
+    saveCanvasToLocalStorage();
+});
+
+// إلغاء الحفظ التلقائي
+document.getElementById('disableAutoSave').addEventListener('click', function () {
+    isAutoSaveEnabled = false;
+    localStorage.removeItem('autoSaveEnabled');
+    localStorage.removeItem('canvasData');
+    alert("تم إلغاء الحفظ التلقائي. لن يتم حفظ أي تغييرات بعد الآن.");
+});
+
+// حفظ حالة الـ canvas إلى localStorage
+function saveCanvasToLocalStorage() {
+    if (isAutoSaveEnabled) {
+        const canvasData = canvas.toJSON();
+        localStorage.setItem('canvasData', JSON.stringify(canvasData));
+    }
+}
+
+// استعادة حالة الـ canvas من localStorage
+function loadCanvasFromLocalStorage() {
+    const autoSaveStatus = localStorage.getItem('autoSaveEnabled');
+    if (autoSaveStatus === 'true') {
+        isAutoSaveEnabled = true;
+        const canvasData = localStorage.getItem('canvasData');
+        if (canvasData) {
+            canvas.loadFromJSON(canvasData, function () {
+                canvas.renderAll();
+            });
+        }
+    }
+}
+
+// حفظ تلقائي عند تعديل أو قفل العناصر
+canvas.on('object:modified', saveCanvasToLocalStorage);
+canvas.on('object:added', saveCanvasToLocalStorage);
+canvas.on('object:removed', saveCanvasToLocalStorage);
+
+// تحقق من حالة قفل العناصر واحفظ
+canvas.on('object:locked', saveCanvasToLocalStorage);
+canvas.on('object:unlocked', saveCanvasToLocalStorage);
+
+// تحميل حالة الـ canvas عند فتح الصفحة
+window.addEventListener('load', loadCanvasFromLocalStorage);
+
+
+
+
+
+        document.getElementById('resetCanvasBtn').addEventListener('click', function () {
+        // عرض نافذة التأكيد
+        const confirmation = confirm("هل أنت متأكد أنك تريد حذف جميع المحتويات؟");
+        
+        if (confirmation) {
+            // إذا أكد المستخدم، يتم مسح الـ Canvas
+            canvas.clear();
+            saveState(); // حفظ حالة جديدة بعد الحذف
+        } else {
+            // إذا ألغى المستخدم، لا يتم فعل شيء
+            alert("تم إلغاء عملية إعادة المحتوى.");
+        }
+    });
+
+    // تهيئة الأشكال
+    initializeShapes();
+</script>
+</body>
+</html>
