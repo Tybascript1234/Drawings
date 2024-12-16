@@ -17,56 +17,10 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 </head>
 <body>
-<button onclick="window.electronAPI.minimizeWindow()">تصغير التطبيق</button>
-<button onclick="window.electronAPI.closeWindow()">إغلاق التطبيق</button>
 
-    
-<script>
-const { app, BrowserWindow, ipcMain } = require('electron');
+    <button onclick="window.electronAPI.minimizeWindow()">تصغير التطبيق</button>
+    <button onclick="window.electronAPI.closeWindow()">إغلاق التطبيق</button>
 
-let mainWindow;
-
-app.on('ready', () => {
-    mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            preload: __dirname + '/preload.js', // تحميل ملف Preload
-            contextIsolation: true,
-            enableRemoteModule: false,
-            nodeIntegration: false
-        }
-    });
-
-    mainWindow.loadURL('https://yourwebsite.com');
-});
-
-ipcMain.on('minimize-window', () => {
-    if (mainWindow) {
-        mainWindow.minimize();
-    }
-});
-
-ipcMain.on('close-window', () => {
-    if (mainWindow) {
-        mainWindow.close();
-    }
-});
-</script>
-
-
-    <script>
-        const { ipcRenderer, contextBridge } = require('electron');
-
-contextBridge.exposeInMainWorld('electronAPI', {
-    minimizeWindow: () => ipcRenderer.send('minimize-window'),
-    closeWindow: () => ipcRenderer.send('close-window')
-});
-
-    </script>
-
-    
-    
     <div class="contenter">
         <!-- 1 -->
             <div class="content1">
