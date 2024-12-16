@@ -26,7 +26,7 @@
                 <button title="تكبير" onclick="maximizeWindow()"><ion-icon name="stop-outline"></ion-icon></button>
                 <div id="maximizeOptions" class="dropdown">
                     <a class="sos"><label onclick="maximizeWindow('top-half')"></label><label onclick="maximizeWindow('bottom-half')" style="margin: 0;"></label></a>
-                    <a><label onclick="maximizeWindow('right-half')"></label><label onclick="maximizeWindow('left-half')" style="margin: 0;"></label></a>
+                    <a><label onclick="maximizeWindow('left-half')"></label><label style="margin: 0;" onclick="maximizeWindow('right-half')"></label></a>
                     <a><label></label><label></label><label></label></a>
                     <a class="xxxx"><label onclick="maximizeWindow('top-left-quarter')"></label><label onclick="maximizeWindow('top-right-quarter')"></label><label onclick="maximizeWindow('bottom-left-quarter')" style="margin-bottom: 0;"></label><label onclick="maximizeWindow('bottom-right-quarter')" style="margin-bottom: 0;"></label></a>
                 </div>
@@ -55,7 +55,7 @@
         // تنفيذ الخيار المحدد لتكبير النافذة
         function maximizeWindow(option) {
             const options = document.getElementById('maximizeOptions');
-            options.style.display = 'none'; // إخفاء قائمة الخيارات بعد الاختيار
+            options.style.display = ''; // إخفاء قائمة الخيارات بعد الاختيار
 
             const width = screen.width;
             const height = screen.height;
