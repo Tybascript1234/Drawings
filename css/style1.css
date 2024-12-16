@@ -482,12 +482,13 @@ body .content-wrapper {
 
 /* show --------------------------------------------- */
 .show {
+    top: 48px;
     background-color: white;
     box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
-    position: absolute;
+    position: fixed;
     z-index: 1020;
-    /* left: 50%; */
-    /* transform: translateX(-50%); */
+    left: 50%;
+    transform: translateX(-50%);
     width: 980px;
     height: 845px;
     /* height: auto; */
@@ -746,4 +747,61 @@ body .content iframe {
 #a3:active {
     background: #ff5b71;
     color: white;
+}
+.zoo {
+    position: relative;
+}
+.zoo:hover div {
+    display: flex;
+}
+.zoo div {
+    box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
+    position: absolute;
+    top: 32px;
+    right: 0;
+    padding-right: 10px;
+    padding-top: 15px;
+    /* padding: 10px; */
+    padding-bottom: 0;
+    padding-left: 0;
+    background: white;
+    border: solid 1px #ccc;
+    border-radius: 8px;
+    height: max-content;
+    display: none;
+    width: max-content;
+    flex-wrap: wrap;
+    max-width: 339px;
+}
+.zoo div a label {
+    display: inline-block;
+    padding: 34px 17px;
+    border-radius: 5px;
+    margin-right: 5px;
+    background: #cccccc00;
+    border: solid 1px #7e7e7e;
+}
+.zoo div a label:hover {
+    background: #2f72df;
+}
+.zoo div a {
+    display: flex;
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
+html body .sos {
+    display: grid;
+}
+html body .sos label {
+    padding: 17px 46px;
+    margin-right: 0;
+    margin-bottom: 5px;
+}
+html body .xxxx {
+    flex-wrap: wrap;
+    width: 123px;
+}
+html body .xxxx label {
+    padding: 27px 27px;
+    margin-bottom: 5px;
 }
