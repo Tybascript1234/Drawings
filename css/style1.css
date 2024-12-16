@@ -777,12 +777,19 @@ body .content iframe {
     max-width: 271px;
 }
 .zoo div a label {
-    display: inline-block;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 34px 17px;
     border-radius: 5px;
     margin-right: 5px;
     background: #cccccc00;
     border: solid 1px #7e7e7e;
+}
+.zoo div a label img {
+    height: 18px;
+    position: absolute;
 }
 .zoo div a label:hover {
     background: #2f72df;
