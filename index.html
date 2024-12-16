@@ -37,90 +37,106 @@
     </div>
 
     <script>
-          // إغلاق التطبيق
-        function closeWindow() {
-            if (confirm("هل أنت متأكد من إغلاق التطبيق؟")) {
-                window.close();
-            }
-        }
+       // إغلاق التطبيق
+function closeWindow() {
+    window.close();
+}
 
-        // تصغير النافذة (إرسالها إلى الخلفية)
-        function minimizeWindow() {
-            window.blur(); // يجعل النافذة في الخلفية
-        }
+// تصغير النافذة (إرسالها إلى الخلفية)
+function minimizeWindow() {
+    window.blur(); // يجعل النافذة في الخلفية
+}
 
-        // إظهار أو إخفاء خيارات التكبير
-        function toggleMaximizeOptions() {
-            const options = document.getElementById('maximizeOptions');
-            options.style.display = options.style.display === 'block' ? '' : 'block';
-        }
+// إظهار أو إخفاء خيارات التكبير
+function toggleMaximizeOptions() {
+    const options = document.getElementById('maximizeOptions');
+    options.style.display = options.style.display === 'block' ? '' : 'block';
+}
 
-        // تنفيذ الخيار المحدد لتكبير النافذة
-        function maximizeWindow(option) {
-            const options = document.getElementById('maximizeOptions');
-            options.style.display = ''; // إخفاء قائمة الخيارات بعد الاختيار
+// تنفيذ الخيار المحدد لتكبير النافذة
+function maximizeWindow(option) {
+    const options = document.getElementById('maximizeOptions');
+    options.style.display = ''; // إخفاء قائمة الخيارات بعد الاختيار
 
-            const width = screen.width;
-            const height = screen.height;
+    const width = screen.width;
+    const height = screen.height;
 
-            // حساب مكان النافذة
-            let left = 0;
-            let top = 0;
-            let newWidth = width;
-            let newHeight = height;
+    let left = 0;
+    let top = 0;
+    let newWidth = width;
+    let newHeight = height;
 
-            switch (option) {
-                case 'fullscreen':
-                    break;
-                case 'normal':
-                    newWidth = 800;
-                    newHeight = 600;
-                    left = (width - newWidth) / 2;
-                    top = (height - newHeight) / 2;
-                    break;
-                case 'right-half':
-                    newWidth = width / 2;
-                    left = width / 2;
-                    break;
-                case 'left-half':
-                    newWidth = width / 2;
-                    break;
-                case 'bottom-half':
-                    newHeight = height / 2;
-                    top = height / 2;
-                    break;
-                case 'top-half':
-                    newHeight = height / 2;
-                    break;
-                case 'top-right-quarter':
-                    newWidth = width / 2;
-                    newHeight = height / 2;
-                    left = width / 2;
-                    break;
-                case 'bottom-right-quarter':
-                    newWidth = width / 2;
-                    newHeight = height / 2;
-                    left = width / 2;
-                    top = height / 2;
-                    break;
-                case 'top-left-quarter':
-                    newWidth = width / 2;
-                    newHeight = height / 2;
-                    break;
-                case 'bottom-left-quarter':
-                    newWidth = width / 2;
-                    newHeight = height / 2;
-                    top = height / 2;
-                    break;
-                default:
-                    alert("خيار غير معروف!");
-                    return;
-            }
+    switch (option) {
+        case 'fullscreen':
+            left = 0;
+            top = 0;
+            newWidth = width;
+            newHeight = height;
+            break;
+        case 'normal':
+            newWidth = 800;
+            newHeight = 600;
+            left = (width - newWidth) / 2;
+            top = (height - newHeight) / 2;
+            break;
+        case 'right-half':
+            newWidth = width / 2;
+            left = width / 2;
+            top = 0;
+            newHeight = height;
+            break;
+        case 'left-half':
+            newWidth = width / 2;
+            left = 0;
+            top = 0;
+            newHeight = height;
+            break;
+        case 'bottom-half':
+            newHeight = height / 2;
+            left = 0;
+            top = height / 2;
+            newWidth = width;
+            break;
+        case 'top-half':
+            newHeight = height / 2;
+            left = 0;
+            top = 0;
+            newWidth = width;
+            break;
+        case 'top-right-quarter':
+            newWidth = width / 2;
+            newHeight = height / 2;
+            left = width / 2;
+            top = 0;
+            break;
+        case 'bottom-right-quarter':
+            newWidth = width / 2;
+            newHeight = height / 2;
+            left = width / 2;
+            top = height / 2;
+            break;
+        case 'top-left-quarter':
+            newWidth = width / 2;
+            newHeight = height / 2;
+            left = 0;
+            top = 0;
+            break;
+        case 'bottom-left-quarter':
+            newWidth = width / 2;
+            newHeight = height / 2;
+            left = 0;
+            top = height / 2;
+            break;
+        default:
+            console.error('Invalid maximize option');
+            return;
+    }
 
-            // تحريك وتغيير حجم النافذة بناءً على الخيار
-            window.moveTo(left, top);
-            window.resizeTo(newWidth, newHeight);
-        }
+    // تحريك وتغيير حجم النافذة بناءً على الخيار
+    window.moveTo(left, top);
+    window.resizeTo(newWidth, newHeight);
+}
+
     </script>
 
     <div class="contenter">
