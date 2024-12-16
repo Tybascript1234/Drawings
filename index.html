@@ -18,13 +18,14 @@
 </head>
 <body>
 
-        <div class="buttons">
-        <button onclick="closeWindow()">إغلاق</button>
-        <button onclick="maximizeWindow()">تكبير</button>
-        <button onclick="minimizeWindow()">تصغير</button>
+    <div class="contruol">
+        <div class="flex"><img src="image/Splice-logo.png" style="height: 20px;margin-right: 10px;" alt=""><span>Drawings</span></div>
+        <div class="flex">
+            <button onclick="minimizeWindow()"><ion-icon name="remove-outline"></ion-icon></button>
+            <button onclick="maximizeWindow()"><ion-icon name="stop-outline"></ion-icon></button>
+            <button id="a3" onclick="closeWindow()" style="font-size: 21px;"><ion-icon name="close-outline"></ion-icon></button>  
+        </div>
     </div>
-
-    <h1>مرحبًا في تطبيقك!</h1>
 
     <script>
         // إغلاق التطبيق
@@ -179,7 +180,7 @@
      <div id="akol-overlay">
      <div id="akol-popup" class="show">
         <div class="omly">
-            <div class="v"><img src="image/Splice-logo.png" style="height: 20px;margin-right: 10px;" alt=""><span>Drawings</span></div>
+            <div class="v"><img src="image/Splice-logo.png" style="height: 25px; border-radius: 6px; margin-right: 10px;" alt=""><span>Drawings</span></div>
             <div>
                 <div class="acuont flex zo"><span class="logen"><span></span></span></div>
                 <button id="closeAkolBtn" class="flex button1 v zo"><ion-icon name="close-outline"></ion-icon></button>
