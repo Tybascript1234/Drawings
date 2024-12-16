@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إزالة الخلفية باستخدام JavaScript</title>
+  <script src="script/image.js"></script>
+  <link rel="stylesheet" href="css/image.css">
+  <style>
+    #resultContainer {
+      display: none;  /* إخفاء الحاوية في البداية */
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .image-wrapper {
+      transition: ease 0.2s;
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      margin: auto;
+      padding: 8px;
+      margin-top: 20px;
+      border: solid 1px #ccc;
+      background: #ecf1f700;
+    }
+    .image-wrapper:hover {
+      background: #e5f1ffb3;
+      border-color: #0000;
+    }
+    .image-wrapper:hover .buttons-container button {
+      border-color: #ffffffa1;
+    }
+    .image-wrapper img {
+      max-width: 200px;
+    }
+    .buttons-container {
+      margin-top: 10px;
+    }
+    .loading-text {
+      margin-top: 10px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+ 
+
+  
+
+
+  <div class="content">
+    <div class="xo ss">
+        <h2>هنا الصور</h2>
+        <div id="selectedImagesContainer"></div>
+        <div id="resultContainer"></div>
+    </div>
+
+    <div class="xo">
+
+    </div>
+
+    <div class="xo ss" style="width: 300px;">
+         <h2>رفع صور وإزالة الخلفية</h2>
+
+          <!-- حقل لاختيار عدة صور -->
+          <label for="imageInput" class="slo" style="background: #4691f3; color: white;border-color: #0000;">رفع الصور</label>
+          <input style="display: none;" type="file" id="imageInput" accept="image/*" multiple>
+
+          <!-- زر لإرسال الصور لإزالة الخلفية -->
+          <button class="slo" id="removeBgBtn">إزالة الخلفية من الصور</button>
+          <hr>
+          <h2>تنزيل الصور</h2>
+          <button class="slo">تنزيل الصور ملف مضغوط</button>
+          <button class="slo">تنزيل الصور pdf</button>
+          <button class="slo">تنزيل الصور</button>
+    </div>
+  </div>
+</body>
+</html>

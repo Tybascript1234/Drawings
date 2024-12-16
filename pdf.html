@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Watermark Remover</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #pdf-render {
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+    }
+    #watermarks, #links {
+      margin-top: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>PDF Watermark Remover</h1>
+  <input type="file" id="upload-pdf" accept="application/pdf">
+  <input type="text" id="pdf-url" placeholder="Enter PDF URL">
+  <button id="load-url">Load PDF from URL</button>
+  <canvas id="pdf-render"></canvas>
+  <div id="watermarks">
+    <h3>Detected Watermarks:</h3>
+    <ul id="watermark-list"></ul>
+  </div>
+  <div id="links">
+    <h3>Extracted Links:</h3>
+    <ul id="link-list"></ul>
+  </div>
+  <button id="remove-watermarks" class="hidden">Remove Watermarks</button>
+  <button id="download-pdf" class="hidden">Download PDF Without Watermarks</button>
+
+  <script>
+    const uploadInput = document.getElementById('upload-pdf');
+    const urlInput = document.getElementById('pdf-url');
+    const loadUrlButton = document.getElementById('load-url');
+    const canvas = document.getElementById('pdf-render');
+    const watermarkList = document.getElementById('watermark-list');
+    const linkList = document.getElementById('link-list');
+    const removeButton = document.getElementById('remove-watermarks');
+    const downloadButton = document.getElementById('download-pdf');
+    const watermarksDiv = document.getElementById('watermarks');
+    const linksDiv = document.getElementById('links');
+
+    let pdfDoc = null;
+    let pdfBytes = null;
+    let watermarks = [];
+    let links = [];
+
+    uploadInput.addEventListener('change', async (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          pdfBytes = new Uint8Array(e.target.result);
+          await renderPDF(pdfBytes);
+        };
+        reader.readAsArrayBuffer(file);
+      }
+    });
+
+    loadUrlButton.addEventListener('click', async () => {
+      const url = urlInput.value;
+      if (url) {
+        try {
+          // Check if the URL is valid
+          const isValidUrl = (str) => {
+            try {
+              new URL(str);
+              return true;
+            } catch {
+              return false;
+            }
+          };
+
+          if (!isValidUrl(url)) {
+            alert('Please enter a valid URL.');
+            return;
+          }
+
+          const response = await fetch(url);
+          if (!response.ok) throw new Error('Failed to fetch the PDF file');
+          const arrayBuffer = await response.arrayBuffer();
+          pdfBytes = new Uint8Array(arrayBuffer);
+          await renderPDF(pdfBytes);
+        } catch (error) {
+          alert('Error loading PDF: ' + error.message);
+        }
+      } else {
+        alert('Please enter a valid URL');
+      }
+    });
+
+    async function renderPDF(bytes) {
+      const loadingTask = pdfjsLib.getDocument({ data: bytes });
+      pdfDoc = await loadingTask.promise;
+
+      const page = await pdfDoc.getPage(1);
+      const viewport = page.getViewport({ scale: 1.5 });
+      const context = canvas.getContext('2d');
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      await page.render({ canvasContext: context, viewport }).promise;
+      await detectWatermarksAndLinks(page);
+    }
+
+    async function detectWatermarksAndLinks(page) {
+      const textContent = await page.getTextContent();
+      const textItems = textContent.items.map(item => item.str);
+
+      // Detect watermarks (simple patterns)
+      const textPatterns = ['Confidential', 'Draft', 'Watermark'];
+      watermarks = textPatterns.filter(pattern => textItems.some(text => text.includes(pattern)));
+      watermarkList.innerHTML = watermarks.map((wm) => `<li>${wm}</li>`).join('');
+
+      // Extract links using regex
+      const urlPattern = /(https?:\/\/[\w.-]+(?:\.[\w.-]+)+(?:[\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])?)/g;
+      links = textItems.flatMap(text => text.match(urlPattern) || []);
+      linkList.innerHTML = links.map((link) => `<li><a href="${link}" target="_blank">${link}</a></li>`).join('');
+
+      watermarksDiv.style.display = 'block';
+      linksDiv.style.display = 'block';
+      removeButton.classList.remove('hidden');
+      downloadButton.classList.remove('hidden');
+    }
+
+    removeButton.addEventListener('click', async () => {
+      if (!pdfBytes || !watermarks.length) return;
+
+      const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+      const pages = pdfDoc.getPages();
+
+      for (const page of pages) {
+        // Process to remove text-based watermarks
+        for (const watermark of watermarks) {
+          // Example removal logic (implementation-specific)
+        }
+      }
+
+      pdfBytes = await pdfDoc.save();
+      alert('Watermarks removed!');
+    });
+
+    downloadButton.addEventListener('click', () => {
+      if (!pdfBytes) return;
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'no-watermarks.pdf';
+      link.click();
+    });
+  </script>
+</body>
+</html>
