@@ -18,8 +18,8 @@
 </head>
 <body>
 
-    <div class="contruol">
-        <div class="flex"><img src="image/Splice-logo.png" style="height: 20px;margin-right: 10px;" alt=""><span>Drawings</span></div>
+    <div class="contruol" id="appWindow">
+        <div class="flex" id="dragArea"><img src="image/Splice-logo.png" style="height: 20px;margin-right: 10px;" alt=""><span>Drawings</span></div>
         <div class="flex">
             <button onclick="minimizeWindow()"><ion-icon name="remove-outline"></ion-icon></button>
             <button onclick="maximizeWindow()"><ion-icon name="stop-outline"></ion-icon></button>
@@ -28,26 +28,50 @@
     </div>
 
     <script>
-        // إغلاق التطبيق
-        function closeWindow() {
+ // دوال الأزرار
+ function closeWindow() {
             window.close();
         }
 
-        // تكبير النافذة
         function maximizeWindow() {
             if (window.outerWidth < screen.width) {
                 window.moveTo(0, 0);
                 window.resizeTo(screen.width, screen.height);
             } else {
                 window.moveTo(100, 100);
-                window.resizeTo(800, 600); // الحجم الافتراضي
+                window.resizeTo(800, 600);
             }
         }
 
-        // تصغير النافذة
         function minimizeWindow() {
-            window.blur(); // يجعل النافذة في الخلفية (تصغيرها)
+            window.blur();
         }
+
+        // السحب والإفلات
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        const dragArea = document.getElementById('dragArea');
+        const appWindow = document.getElementById('appWindow');
+
+        dragArea.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - appWindow.getBoundingClientRect().left;
+            offsetY = e.clientY - appWindow.getBoundingClientRect().top;
+            dragArea.style.cursor = 'move';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                appWindow.style.left = e.clientX - offsetX + 'px';
+                appWindow.style.top = e.clientY - offsetY + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            dragArea.style.cursor = 'move';
+        });
     </script>
 
     <div class="contenter">
