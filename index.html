@@ -18,8 +18,36 @@
 </head>
 <body>
 
-    <button onclick="window.electronAPI.minimizeWindow()">تصغير التطبيق</button>
-    <button onclick="window.electronAPI.closeWindow()">إغلاق التطبيق</button>
+        <div class="buttons">
+        <button onclick="closeWindow()">إغلاق</button>
+        <button onclick="maximizeWindow()">تكبير</button>
+        <button onclick="minimizeWindow()">تصغير</button>
+    </div>
+
+    <h1>مرحبًا في تطبيقك!</h1>
+
+    <script>
+        // إغلاق التطبيق
+        function closeWindow() {
+            window.close();
+        }
+
+        // تكبير النافذة
+        function maximizeWindow() {
+            if (window.outerWidth < screen.width) {
+                window.moveTo(0, 0);
+                window.resizeTo(screen.width, screen.height);
+            } else {
+                window.moveTo(100, 100);
+                window.resizeTo(800, 600); // الحجم الافتراضي
+            }
+        }
+
+        // تصغير النافذة
+        function minimizeWindow() {
+            window.blur(); // يجعل النافذة في الخلفية (تصغيرها)
+        }
+    </script>
 
     <div class="contenter">
         <!-- 1 -->
