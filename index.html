@@ -28,7 +28,7 @@
     </div>
 
     <script>
-       // متغير لتتبع حالة النافذة
+        // تعريف متغير لحالة التكبير
         let isMaximized = false;
 
         // إغلاق التطبيق
@@ -36,23 +36,24 @@
             window.close();
         }
 
-        // تكبير أو تصغير النافذة
+        // تكبير / تصغير النافذة
         function maximizeWindow() {
             let screenWidth = screen.width;
             let screenHeight = screen.height;
+            let currentWidth = window.outerWidth;
+            let currentHeight = window.outerHeight;
 
-            if (isMaximized) {
-                // إذا كانت النافذة مكبرة، نقوم بتصغيرها
-                window.resizeTo(800, 600); // الحجم الافتراضي
-                window.moveTo(100, 100); // وضعها في مكان مناسب
-            } else {
-                // إذا كانت النافذة صغيرة، نقوم بتكبيرها
-                window.moveTo(0, 0);
+            if (!isMaximized) {
+                // إذا كانت النافذة غير مكبرة، نقوم بتكبيرها
+                window.moveTo(0, 0); // تحريك النافذة إلى الزاوية العلوية اليسرى
                 window.resizeTo(screenWidth, screenHeight); // ملء الشاشة
+                isMaximized = true; // تغيير حالة التكبير
+            } else {
+                // إذا كانت النافذة مكبرة، نقوم بتصغيرها إلى الحجم الافتراضي
+                window.moveTo(screenWidth / 4, screenHeight / 4); // تحريك النافذة إلى المنتصف
+                window.resizeTo(800, 600); // حجم النافذة الافتراضي
+                isMaximized = false; // تغيير حالة التصغير
             }
-
-            // تغيير حالة النافذة
-            isMaximized = !isMaximized;
         }
 
         // تصغير النافذة
