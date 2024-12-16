@@ -28,37 +28,35 @@
     </div>
 
     <script>
-        // تعريف متغير لحالة التكبير
-        let isMaximized = false;
-
         // إغلاق التطبيق
         function closeWindow() {
             window.close();
         }
 
-        // تكبير / تصغير النافذة
+        // تكبير النافذة
         function maximizeWindow() {
-            let screenWidth = screen.width;
-            let screenHeight = screen.height;
-            let currentWidth = window.outerWidth;
-            let currentHeight = window.outerHeight;
-
-            if (!isMaximized) {
-                // إذا كانت النافذة غير مكبرة، نقوم بتكبيرها
-                window.moveTo(0, 0); // تحريك النافذة إلى الزاوية العلوية اليسرى
-                window.resizeTo(screenWidth, screenHeight); // ملء الشاشة
-                isMaximized = true; // تغيير حالة التكبير
+            if (window.outerWidth < screen.width) {
+                // تكبير النافذة
+                var width = screen.width;
+                var height = screen.height;
+                var left = (screen.width - width) / 2;
+                var top = (screen.height - height) / 2;
+                window.moveTo(left, top);
+                window.resizeTo(width, height);
             } else {
-                // إذا كانت النافذة مكبرة، نقوم بتصغيرها إلى الحجم الافتراضي
-                window.moveTo(screenWidth / 4, screenHeight / 4); // تحريك النافذة إلى المنتصف
-                window.resizeTo(100%, 100%); // حجم النافذة الافتراضي
-                isMaximized = false; // تغيير حالة التصغير
+                // العودة للحجم الطبيعي
+                var width = 800;
+                var height = 600;
+                var left = (screen.width - width) / 2;
+                var top = (screen.height - height) / 2;
+                window.moveTo(left, top);
+                window.resizeTo(width, height);
             }
         }
 
-        // تصغير النافذة
+        // تصغير النافذة (إرسالها إلى الخلفية)
         function minimizeWindow() {
-            window.blur(); // يجعل النافذة في الخلفية (تصغيرها)
+            window.blur(); // يجعل النافذة في الخلفية
         }
     </script>
 
