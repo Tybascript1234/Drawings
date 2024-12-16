@@ -17,26 +17,55 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 </head>
 <body>
-   <button onclick="require('@electron/remote').getCurrentWindow().minimize()">تصغير التطبيق</button>
-<button onclick="window.close()">إغلاق التطبيق</button>
+<button onclick="window.electronAPI.minimizeWindow()">تصغير التطبيق</button>
+<button onclick="window.electronAPI.closeWindow()">إغلاق التطبيق</button>
+
     
 <script>
-    const { app, BrowserWindow } = require('electron');
-const remoteMain = require('@electron/remote/main');
+const { app, BrowserWindow, ipcMain } = require('electron');
+
+let mainWindow;
 
 app.on('ready', () => {
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
         webPreferences: {
-            enableRemoteModule: true, // مطلوب في الإصدارات القديمة
-            contextIsolation: false, // تعطيل عزل السياق لاستخدام require
-            nodeIntegration: true,  // لتفعيل Node.js
-        },
+            preload: __dirname + '/preload.js', // تحميل ملف Preload
+            contextIsolation: true,
+            enableRemoteModule: false,
+            nodeIntegration: false
+        }
     });
 
-    remoteMain.initialize(); // تفعيل `remote`
-    remoteMain.enable(mainWindow.webContents);
+    mainWindow.loadURL('https://yourwebsite.com');
+});
+
+ipcMain.on('minimize-window', () => {
+    if (mainWindow) {
+        mainWindow.minimize();
+    }
+});
+
+ipcMain.on('close-window', () => {
+    if (mainWindow) {
+        mainWindow.close();
+    }
 });
 </script>
+
+
+    <script>
+        const { ipcRenderer, contextBridge } = require('electron');
+
+contextBridge.exposeInMainWorld('electronAPI', {
+    minimizeWindow: () => ipcRenderer.send('minimize-window'),
+    closeWindow: () => ipcRenderer.send('close-window')
+});
+
+    </script>
+
+    
     
     <div class="contenter">
         <!-- 1 -->
