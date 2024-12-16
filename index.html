@@ -38,8 +38,10 @@
 
     <script>
           // إغلاق التطبيق
-          function closeWindow() {
-            window.close();
+        function closeWindow() {
+            if (confirm("هل أنت متأكد من إغلاق التطبيق؟")) {
+                window.close();
+            }
         }
 
         // تصغير النافذة (إرسالها إلى الخلفية)
@@ -67,64 +69,52 @@
             let newWidth = width;
             let newHeight = height;
 
-            if (option === 'fullscreen') {
-                left = 0;
-                top = 0;
-                newWidth = width;
-                newHeight = height;
-            } else if (option === 'normal') {
-                newWidth = 800;
-                newHeight = 600;
-                left = (width - newWidth) / 2;
-                top = (height - newHeight) / 2;
-            } else if (option === 'right-half') {
-                // تكبير نصف الشاشة من الجهة اليمنى
-                newWidth = width / 2;
-                left = width / 2; // الجهة اليمنى
-                top = 0;
-                newHeight = height;
-            } else if (option === 'left-half') {
-                // تكبير نصف الشاشة من الجهة اليسرى
-                newWidth = width / 2;
-                left = 0; // الجهة اليسرى
-                top = 0;
-                newHeight = height;
-            } else if (option === 'bottom-half') {
-                // تكبير نصف الشاشة من الأسفل
-                newHeight = height / 2;
-                left = 0;
-                top = height / 2; // الأسفل
-                newWidth = width;
-            } else if (option === 'top-half') {
-                // تكبير نصف الشاشة من الأعلى
-                newHeight = height / 2;
-                left = 0;
-                top = 0; // الأعلى
-                newWidth = width;
-            } else if (option === 'top-right-quarter') {
-                // ربع الشاشة من الزاوية العلوية اليمنى
-                newWidth = width / 2;
-                newHeight = height / 2;
-                left = width / 2; // الجهة اليمنى
-                top = 0; // الزاوية العلوية
-            } else if (option === 'bottom-right-quarter') {
-                // ربع الشاشة من الزاوية السفلية اليمنى
-                newWidth = width / 2;
-                newHeight = height / 2;
-                left = width / 2; // الجهة اليمنى
-                top = height / 2; // الزاوية السفلية
-            } else if (option === 'top-left-quarter') {
-                // ربع الشاشة من الزاوية العلوية اليسرى
-                newWidth = width / 2;
-                newHeight = height / 2;
-                left = 0; // الجهة اليسرى
-                top = 0; // الزاوية العلوية
-            } else if (option === 'bottom-left-quarter') {
-                // ربع الشاشة من الزاوية السفلية اليسرى
-                newWidth = width / 2;
-                newHeight = height / 2;
-                left = 0; // الجهة اليسرى
-                top = height / 2; // الزاوية السفلية
+            switch (option) {
+                case 'fullscreen':
+                    break;
+                case 'normal':
+                    newWidth = 800;
+                    newHeight = 600;
+                    left = (width - newWidth) / 2;
+                    top = (height - newHeight) / 2;
+                    break;
+                case 'right-half':
+                    newWidth = width / 2;
+                    left = width / 2;
+                    break;
+                case 'left-half':
+                    newWidth = width / 2;
+                    break;
+                case 'bottom-half':
+                    newHeight = height / 2;
+                    top = height / 2;
+                    break;
+                case 'top-half':
+                    newHeight = height / 2;
+                    break;
+                case 'top-right-quarter':
+                    newWidth = width / 2;
+                    newHeight = height / 2;
+                    left = width / 2;
+                    break;
+                case 'bottom-right-quarter':
+                    newWidth = width / 2;
+                    newHeight = height / 2;
+                    left = width / 2;
+                    top = height / 2;
+                    break;
+                case 'top-left-quarter':
+                    newWidth = width / 2;
+                    newHeight = height / 2;
+                    break;
+                case 'bottom-left-quarter':
+                    newWidth = width / 2;
+                    newHeight = height / 2;
+                    top = height / 2;
+                    break;
+                default:
+                    alert("خيار غير معروف!");
+                    return;
             }
 
             // تحريك وتغيير حجم النافذة بناءً على الخيار
