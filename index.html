@@ -17,13 +17,24 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 </head>
 <body>
-    <div class="content">
+    <div class="contenter">
         <!-- 1 -->
             <div class="content1">
                 <div class="content1-list">
                     <div class="filter"><button class="flex zo"><ion-icon name="filter-outline"></ion-icon></button></div>
                     <button class="back"><ion-icon name="caret-back-outline"></ion-icon></button>
-                    <div class="window"></div>
+
+                    <!-- window -->
+                    <div class="window">
+                        <div>
+                            <div>
+                                <div id="container1" class="content-wrapper"> <div class="Open_tap show-button" onclick="showContent(1)"> <a class="v"> <img src="image/1.png" alt=""> <span>قص خلفية الصور</span> </a> </div> <button class="flex zo close-button" onclick="closeDiv(1)"> <ion-icon name="close"></ion-icon> </button> </div>
+                                <div id="container2" class="content-wrapper"> <div class="Open_tap show-button" onclick="showContent(2)"> <a class="v"> <img src="image/2.png" alt=""> <span>PDF تعديل ملف</span> </a> </div> <button class="flex zo close-button" onclick="closeDiv(2)"> <ion-icon name="close"></ion-icon> </button> </div>
+                            </div>
+                        </div>
+                        <button class="window-add flex zo" id="showAkolBtn" title="New tab"><ion-icon name="add-outline"></ion-icon></button>
+                    </div>
+
                     <button class="back"><ion-icon name="caret-forward-outline"></ion-icon></button>
                     <div class="back-button">
                         <button class="zo" onclick="undo()"><ion-icon name="arrow-back-outline"></ion-icon></button>
@@ -32,13 +43,19 @@
                     </div>
                 </div>
                 <div class="content1-div">
+                    <label for="toggleBtn6" class="content1-div-div"><div class="flex"><a class="so" style="margin-right: 10px;"></a><span>عرض خاص لفترة محدودة جميع ادوات التعديل مجانية</span></div></label>
+                    <!-- ------------------- -->
                     <div id="canvas-container" width="1201px" style="position: relative; height: max-content; display: flex ; justify-content: center;">
-                        <canvas id="canvas" width="1200px" height="744px" style="border: solid 1px #ccc;max-width: 100%;"></canvas>
+                        <canvas id="canvas" width="1200px" height="720px" style="border: solid 1px #ccc;max-width: 100%;"></canvas>
                         <div style="top: 50%; transform: translateX(-50%); position: absolute; left: -29px;">
                             <span style="position: absolute; transform: rotate(90deg);width: max-content;">745px</span>
                         </div>
                         <span style="position: absolute; bottom: -20px; margin: auto;">1201px</span>
                     </div>
+
+                    <!-- --------------------- -->
+                    <div id="content1" class="content xxf"><div id="contentex1"></div></div>
+                    <div id="content2" class="content xxf"><div id="contentex2"></div></div>
                     
                 </div>
 
@@ -85,14 +102,25 @@
                 
                 <!-- 5 -->
                 <div class="history-div box" id="box5">
+                    <label class="Edit" onclick="downloadAsImage()"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/9205/9205302.png" alt=""></label>
+                    <g></g>
                     <label class="Edit" onclick="downloadAsPSD()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/512px-Adobe_Photoshop_CC_icon.svg.png?20200616073617" alt=""></label>
                     <label class="Edit" onclick="downloadAsPremiere()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/2101px-Adobe_Premiere_Pro_CC_icon.svg.png" alt=""></label>
-                    <label class="Edit" onclick="downloadAsImage()"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/9205/9205302.png" alt=""></label>
+                    <label class="Edit" onclick=""><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/1200px-Adobe_Illustrator_CC_icon.svg.png" alt=""></label>
+                    <label class="Edit" onclick=""><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Adobe_InDesign_CC_icon.svg/1200px-Adobe_InDesign_CC_icon.svg.png" alt=""></label>
+                    <label class="Edit" onclick=""><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/1014/1014296.png" alt=""></label>
+                    <g></g>
+                    <label class="Edit" for=""><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/5968/5968775.png" alt=""></label>
+                    <label class="Edit" for=""><a>Download</a><img src="https://files.raycast.com/l1wnrfl0ui0xczjl1mk4qt28ow2t" alt=""></label>
                 </div>
 
                 <!-- 6 -->
                 <div class="history-div box" id="acuonts">
                     <div class="Edit acuont-div"><a>تسجيل الدخول</a><div class="acuont"><span class="logen"><span></span></span></div></div>
+                    <g></g>
+                    <div class="Edit"><a>ادعمنا</a><span>ادعمنا لنستمر</span></div>
+                    <div class="Edit"><a>مساهمة</a><span>ساهم معنا</span></div>
+                    <div class="Edit"><a>مراسلة</a><span>تواصل مع الدعم</span></div>
                     <g></g>
                     <label class="Edit" id="enableAutoSave"><a>Ok</a><span>تفعيل الحفظ التلقائي</span></label>
                     <label class="Edit" id="disableAutoSave"><a style="color: rgb(243, 48, 48);">Cancel</a><span>الغاء الحفظ التلقائي</span></label>
@@ -101,17 +129,53 @@
 
         <!-- 2 -->
             <div class="content2">
-                <button class="flex button1 zo" id="acuont"><span class="logen"><span></span></span></button>
-                <button class="flex button1 zo" id="toggleBtn4" style="font-size: 24px;"><ion-icon name="add-outline"></ion-icon></button>
-                <button class="flex button1 zo" onclick="duplicate()"><ion-icon name="copy-outline"></ion-icon></button>
-                <button class="flex button1 zo" id="toggleBtn3"><ion-icon name="brush-outline"></ion-icon></button>
-                <button class="flex button1 zo" id="toggleBtn1"><ion-icon name="shapes-outline"></ion-icon></button>
-                <button class="flex button1 zo" id="toggleBtn5"><ion-icon name="download-outline"></ion-icon></button>
-                <button class="flex button1 zo" id="toggleBtn2"><span class="material-symbols-outlined"> history </span></button>
-                <button class="flex button1 zo" onclick="deleteObjects()"><ion-icon name="trash-outline"></ion-icon></button>
+                <button class="flex button1 v zo" id="acuont"><span class="logen"><span></span></span></button>
+                <button class="flex button1 v zo" id="toggleBtn4" style="font-size: 24px;"><ion-icon name="add-outline"></ion-icon></button>
+                <button class="flex button1 v zo" onclick="duplicate()"><ion-icon name="copy-outline"></ion-icon></button>
+                <button class="flex button1 v zo" id="toggleBtn3"><ion-icon name="brush-outline"></ion-icon></button>
+                <button class="flex button1 v zo" id="toggleBtn1"><ion-icon name="shapes-outline"></ion-icon></button>
+                <button class="flex button1 v zo" id="toggleBtn5"><ion-icon name="download-outline"></ion-icon></button>
+                <button class="flex button1 v zo" id="toggleBtn2"><span class="material-symbols-outlined"> history </span></button>
+                <button class="flex button1 v zo" onclick="deleteObjects()"><ion-icon name="trash-outline"></ion-icon></button>
             </div>
+
+
     </div>
 
+<!--     -->
+    <!-- --------------------- -->
+     <div id="akol-overlay">
+     <div id="akol-popup" class="show">
+        <div class="omly">
+            <div class="v"><img src="image/Splice-logo.png" style="height: 20px;margin-right: 10px;" alt=""><span>Drawings</span></div>
+            <div>
+                <div class="acuont flex zo"><span class="logen"><span></span></span></div>
+                <button id="closeAkolBtn" class="flex button1 v zo"><ion-icon name="close-outline"></ion-icon></button>
+            </div>
+        </div>
+        <!-- <h2>تصفح إضافاتنا بضغطة زر</h2> -->
+        <div class="toggle-button" style="margin: 16px;">
+            <div class="Background">
+                <div class="Background-div" style="background-image: url(image/download\ \(1\).png);"><span></span><img src="image/download (2).png" alt=""></div>
+                <div class="show-div">
+                  <img src="image/1.png" alt="">
+                  <br>
+                  <button onclick="toggleShowButton(1)">Open</button><span>قص خلفية الصور</span>
+                  <span class="on"></span>
+                </div>
+            </div>
+            
+            <div class="Background">
+                <div class="Background-div"><img src="https://www.almowaten.net/wp-content/uploads/2020/09/%D8%AA%D8%AD%D9%88%D9%8A%D9%84-%D8%B5%D9%88%D8%B1%D8%A9-%D8%A7%D9%84%D9%89-pdf.jpg" alt=""></div>
+                <div class="show-div">
+                  <img src="image/2.png" alt="">
+                  <br>
+                  <button onclick="toggleShowButton(2)">Open</button><span>PDF تعديل ملف</span>
+                </div>
+            </div>
+          </div>          
+     </div>
+    </div>
 
     <script>
         const canvas = new fabric.Canvas('canvas');
@@ -593,6 +657,36 @@ window.addEventListener('load', loadCanvasFromLocalStorage);
 
     // تهيئة الأشكال
     initializeShapes();
+</script>
+
+
+<script>
+ // روابط متعددة لعرضها في الـ divs المختلفة
+ const urls = [
+      "image.html",  // الرابط الأول
+      "pdf.html"                 // الرابط الثاني
+    ];
+
+    // دالة لإضافة iframe داخل div بناءً على الرابط
+    function addIframeToDiv(divId, url) {
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.width = "100%";      // تعيين العرض إلى 100%
+      iframe.height = "600px";    // تعيين الارتفاع
+      iframe.frameBorder = "0";   // إزالة الإطار حول الـ iframe
+
+      // إضافة الـ iframe إلى الـ div
+      document.getElementById(divId).appendChild(iframe);
+    }
+
+    // عند تحميل الصفحة، نقوم بإضافة الـ iframe إلى كل div
+    window.onload = function() {
+      // إضافة iframe للمحتوى الأول
+      addIframeToDiv("contentex1", urls[0]);
+
+      // إضافة iframe للمحتوى الثاني
+      addIframeToDiv("contentex2", urls[1]);
+    };
 </script>
 </body>
 </html>
