@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    <div class="contruol windowes" id="title-bar">
+    <div class="contruol" id="">
         <div class="flex"><img src="image/Splice-logo.png" style="height: 20px;margin-right: 10px;" alt=""><span>Drawings</span></div>
         <div class="flex">
             <button onclick="minimizeWindow()"><ion-icon name="remove-outline"></ion-icon></button>
@@ -28,33 +28,7 @@
     </div>
 
     <script>
-            // متغيرات للسحب
-            let isDragging = false;
-        let offsetX, offsetY;
-
-        // دالة لبدء السحب
-        document.getElementById('title-bar').addEventListener('mousedown', function(e) {
-            isDragging = true;
-            offsetX = e.clientX - document.querySelector('.window').getBoundingClientRect().left;
-            offsetY = e.clientY - document.querySelector('.window').getBoundingClientRect().top;
-        });
-
-        // دالة للتحريك أثناء السحب
-        document.addEventListener('mousemove', function(e) {
-            if (isDragging) {
-                let x = e.clientX - offsetX;
-                let y = e.clientY - offsetY;
-                document.querySelector('.windowes').style.left = x + 'px';
-                document.querySelector('.windowes').style.top = y + 'px';
-            }
-        });
-
-        // دالة لإيقاف السحب
-        document.addEventListener('mouseup', function() {
-            isDragging = false;
-        });
-
-        // إغلاق التطبيق
+           // إغلاق التطبيق
         function closeWindow() {
             window.close();
         }
