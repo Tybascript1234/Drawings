@@ -17,9 +17,27 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 </head>
 <body>
-    <button onclick="require('electron').remote.getCurrentWindow().minimize()">تصغير التطبيق</button>
+   <button onclick="require('@electron/remote').getCurrentWindow().minimize()">تصغير التطبيق</button>
 <button onclick="window.close()">إغلاق التطبيق</button>
+    
+<script>
+    const { app, BrowserWindow } = require('electron');
+const remoteMain = require('@electron/remote/main');
 
+app.on('ready', () => {
+    const mainWindow = new BrowserWindow({
+        webPreferences: {
+            enableRemoteModule: true, // مطلوب في الإصدارات القديمة
+            contextIsolation: false, // تعطيل عزل السياق لاستخدام require
+            nodeIntegration: true,  // لتفعيل Node.js
+        },
+    });
+
+    remoteMain.initialize(); // تفعيل `remote`
+    remoteMain.enable(mainWindow.webContents);
+});
+</script>
+    
     <div class="contenter">
         <!-- 1 -->
             <div class="content1">
