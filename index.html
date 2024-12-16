@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="content1-div">
-                    <label class="content1-div-div"><div class="flex"><a class="so" style="margin-right: 10px;"></a><span>عرض خاص لفترة محدودة جميع ادوات التعديل مجانية</span></div></label>
+                    <div class="content1-div-div"><div class="flex"><a class="so" style="margin-right: 10px;"></a><span>عرض خاص لفترة محدودة جميع ادوات التعديل مجانية</span></div></div>
                     <!-- ------------------- -->
                     <div id="canvas-container" width="1201px" style="position: relative; height: max-content; display: flex ; justify-content: center;">
                         <canvas id="canvas" width="1200px" height="720px" style="border: solid 1px #ccc;max-width: 100%;"></canvas>
@@ -71,10 +71,10 @@
                     <input type="color" class="haden" id="textColor" value="#000000" onchange="changeTextColor()"/>
                     <label for="shapeColor" class="Edit"><a>Edit</a><span>لون الشكل</span></label>
                     <input type="color" class="haden" id="shapeColor" value="#ff0000" onchange="changeShapeColor()"/>
-                    <label onclick="changeColor()" class="Edit"><a>Edit</a><span>لون الخلفية</span></label>
+                    <div onclick="changeColor()" class="Edit"><a>Edit</a><span>لون الخلفية</span></div>
                     <g></g>
                     <label for="shapeOpacity" class="Edit"><a><input type="range" id="shapeOpacity" min="0" max="1" step="0.01" value="1" onchange="changeShapeOpacity()"/></a><span>شفافية الشكل</span></label>
-                    <label onclick="changeOpacity()" class="Edit"><a>Edit</a><span>شفافية الخلفية</span></label>
+                    <div onclick="changeOpacity()" class="Edit"><a>Edit</a><span>شفافية الخلفية</span></div>
                     <g></g>
                     <div class="Edit">
                         <select class="input" id="textAlign" onchange="changeTextAlignment()">
@@ -84,34 +84,34 @@
                         </select>
                         <span>محاذاة النص</span>
                     </div>
-                    <label class="Edit"><input class="input" type="number" id="textSize" value="20" min="10" max="100" onchange="changeTextSize()"/><span>حجم النص</span></label>
+                    <div class="Edit"><input class="input" type="number" id="textSize" value="20" min="10" max="100" onchange="changeTextSize()"/><span>حجم النص</span></div>
                     <g></g>
-                    <label onclick="lock()" class="Edit"><a>Edit</a><span>اضافة قفل</span></label>
-                    <label onclick="unlock()" class="Edit" style="display: none;"><a style="color: rgb(245, 63, 63);">Delete</a><span>الغاء قفل</span></label>
+                    <div onclick="lock()" class="Edit"><a>Edit</a><span>اضافة قفل</span></div>
+                    <div onclick="unlock()" class="Edit" style="display: none;"><a style="color: rgb(245, 63, 63);">Delete</a><span>الغاء قفل</span></div>
                 </div>
 
                 <!-- 4 -->
                 <div class="history-div box" id="box4">
                     <label for="upload" class="Edit"><a>Add</a><span>اضف صورة</span></label>
                     <input type="file" class="haden" id="upload" accept="image/*" />
-                    <label onclick="addText()" class="Edit"><a>Add</a><span>اضف نص</span></label>
-                    <label onclick="addShadow()" class="Edit"><a>Add</a><span>اضف ظل</span></label>
+                    <div onclick="addText()" class="Edit"><a>Add</a><span>اضف نص</span></div>
+                    <div onclick="addShadow()" class="Edit"><a>Add</a><span>اضف ظل</span></div>
                     <g></g>
-                    <label onclick="removeShadow()" class="Edit"><a>Ok</a><span>ازالة الظل</span></label>
+                    <div onclick="removeShadow()" class="Edit"><a>Ok</a><span>ازالة الظل</span></div>
                 </div>
                 
                 <!-- 5 -->
                 <div class="history-div box" id="box5">
-                    <label class="Edit" onclick="downloadAsImage()"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/9205/9205302.png" alt=""></label>
+                    <div class="Edit" onclick="downloadAsImage()"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/9205/9205302.png" alt=""></div>
                     <g></g>
-                    <label class="Edit" onclick="downloadAsPSD()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/512px-Adobe_Photoshop_CC_icon.svg.png?20200616073617" alt=""></label>
-                    <label class="Edit" onclick="downloadAsPremiere()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/2101px-Adobe_Premiere_Pro_CC_icon.svg.png" alt=""></label>
-                    <label class="Edit" onclick=""><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/1200px-Adobe_Illustrator_CC_icon.svg.png" alt=""></label>
-                    <label class="Edit" onclick=""><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Adobe_InDesign_CC_icon.svg/1200px-Adobe_InDesign_CC_icon.svg.png" alt=""></label>
-                    <label class="Edit" onclick=""><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/1014/1014296.png" alt=""></label>
+                    <div class="Edit" onclick="downloadAsPSD()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/512px-Adobe_Photoshop_CC_icon.svg.png?20200616073617" alt=""></div>
+                    <div class="Edit" onclick="downloadAsPremiere()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/2101px-Adobe_Premiere_Pro_CC_icon.svg.png" alt=""></div>
+                    <div class="Edit" onclick=""><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/1200px-Adobe_Illustrator_CC_icon.svg.png" alt=""></div>
+                    <div class="Edit" onclick=""><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Adobe_InDesign_CC_icon.svg/1200px-Adobe_InDesign_CC_icon.svg.png" alt=""></div>
+                    <div class="Edit" onclick=""><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/1014/1014296.png" alt=""></div>
                     <g></g>
-                    <label class="Edit"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/5968/5968775.png" alt=""></label>
-                    <label class="Edit"><a>Download</a><img src="https://files.raycast.com/l1wnrfl0ui0xczjl1mk4qt28ow2t" alt=""></label>
+                    <div class="Edit"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/5968/5968775.png" alt=""></div>
+                    <div class="Edit"><a>Download</a><img src="https://files.raycast.com/l1wnrfl0ui0xczjl1mk4qt28ow2t" alt=""></div>
                 </div>
 
                 <!-- 6 -->
@@ -122,8 +122,8 @@
                     <div class="Edit"><a>مساهمة</a><span>ساهم معنا</span></div>
                     <div class="Edit"><a>مراسلة</a><span>تواصل مع الدعم</span></div>
                     <g></g>
-                    <label class="Edit" id="enableAutoSave"><a>Ok</a><span>تفعيل الحفظ التلقائي</span></label>
-                    <label class="Edit" id="disableAutoSave"><a style="color: rgb(243, 48, 48);">Cancel</a><span>الغاء الحفظ التلقائي</span></label>
+                    <div class="Edit" id="enableAutoSave"><a>Ok</a><span>تفعيل الحفظ التلقائي</span></div>
+                    <div class="Edit" id="disableAutoSave"><a style="color: rgb(243, 48, 48);">Cancel</a><span>الغاء الحفظ التلقائي</span></div>
                 </div>
             </div>
 
