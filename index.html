@@ -28,21 +28,31 @@
     </div>
 
     <script>
-           // إغلاق التطبيق
-           function closeWindow() {
+       // متغير لتتبع حالة النافذة
+        let isMaximized = false;
+
+        // إغلاق التطبيق
+        function closeWindow() {
             window.close();
         }
 
-        // تكبير النافذة إلى النصف
+        // تكبير أو تصغير النافذة
         function maximizeWindow() {
             let screenWidth = screen.width;
             let screenHeight = screen.height;
-            let newWidth = screenWidth / 2; // نصف عرض الشاشة
-            let newHeight = screenHeight / 2; // نصف ارتفاع الشاشة
 
-            // تغيير حجم وموقع النافذة
-            window.moveTo(screenWidth / 4, screenHeight / 4); // وضع النافذة في المنتصف
-            window.resizeTo(newWidth, newHeight); // تكبير النافذة إلى النصف
+            if (isMaximized) {
+                // إذا كانت النافذة مكبرة، نقوم بتصغيرها
+                window.resizeTo(800, 600); // الحجم الافتراضي
+                window.moveTo(100, 100); // وضعها في مكان مناسب
+            } else {
+                // إذا كانت النافذة صغيرة، نقوم بتكبيرها
+                window.moveTo(0, 0);
+                window.resizeTo(screenWidth, screenHeight); // ملء الشاشة
+            }
+
+            // تغيير حالة النافذة
+            isMaximized = !isMaximized;
         }
 
         // تصغير النافذة
