@@ -686,6 +686,8 @@ body .content iframe {
     cursor: pointer;
     display: none;
     position: fixed;
+    align-items: center;
+    justify-content: center;
     top: 0;
     left: 0;
     width: 100%;
@@ -695,7 +697,7 @@ body .content iframe {
     pointer-events: none;
 }
 #akol-overlay.active {
-    display: block;
+    display: flex;
     pointer-events: auto;
 }
 
