@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch('https://api.remove.bg/v1.0/removebg', {
           method: 'POST',
           headers: {
-            'X-Api-Key': 'wxnosjnzMLCpMN1cAYYzxFkR', // ضع مفتاح API الخاص بك هنا
+            'X-Api-Key': 'Tmp2kyYa2A8iFBBuNM2degsH', // ضع مفتاح API الخاص بك هنا
           },
           body: formData,
         });
