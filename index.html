@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="scrollbar-width: none;">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,41 +22,113 @@
         <div class="flex"><img src="image/Splice-logo.png" style="height: 20px;margin-right: 10px;" alt=""><span>Drawings</span></div>
         <div class="flex">
             <button title="تقليل" onclick="minimizeWindow()"><ion-icon name="remove-outline"></ion-icon></button>
-            <button title="تكبير" onclick="maximizeWindow()"><ion-icon name="stop-outline"></ion-icon></button>
+            <div class="zoo">
+                <button title="تكبير" onclick="maximizeWindow()"><ion-icon name="stop-outline"></ion-icon></button>
+                <div>
+                    <a class="sos"><label onclick="maximizeWindow('top-half')"></label><label onclick="maximizeWindow('bottom-half')" style="margin: 0;"></label></a>
+                    <a><label onclick="maximizeWindow('right-half')"></label><label onclick="maximizeWindow('left-half')" style="margin: 0;"></label></a>
+                    <a><label></label><label></label><label></label></a>
+                    <a class="xxxx"><label onclick="maximizeWindow('top-left-quarter')"></label><label onclick="maximizeWindow('top-right-quarter')"></label><label onclick="maximizeWindow('bottom-left-quarter')" style="margin-bottom: 0;"></label><label onclick="maximizeWindow('bottom-right-quarter')" style="margin-bottom: 0;"></label></a>
+                </div>
+            </div>
             <button title="اغلاق" id="a3" onclick="closeWindow()" style="font-size: 21px;"><ion-icon name="close-outline"></ion-icon></button>  
         </div>
     </div>
 
     <script>
-        // إغلاق التطبيق
-        function closeWindow() {
+          // إغلاق التطبيق
+          function closeWindow() {
             window.close();
-        }
-
-        // تكبير النافذة
-        function maximizeWindow() {
-            if (window.outerWidth < screen.width) {
-                // تكبير النافذة
-                var width = screen.width;
-                var height = screen.height;
-                var left = (screen.width - width) / 2;
-                var top = (screen.height - height) / 2;
-                window.moveTo(left, top);
-                window.resizeTo(width, height);
-            } else {
-                // العودة للحجم الطبيعي
-                var width = 800;
-                var height = 600;
-                var left = (screen.width - width) / 2;
-                var top = (screen.height - height) / 2;
-                window.moveTo(left, top);
-                window.resizeTo(width, height);
-            }
         }
 
         // تصغير النافذة (إرسالها إلى الخلفية)
         function minimizeWindow() {
             window.blur(); // يجعل النافذة في الخلفية
+        }
+
+        // إظهار أو إخفاء خيارات التكبير
+        function toggleMaximizeOptions() {
+            const options = document.getElementById('maximizeOptions');
+            options.style.display = options.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // تنفيذ الخيار المحدد لتكبير النافذة
+        function maximizeWindow(option) {
+            const options = document.getElementById('maximizeOptions');
+            options.style.display = 'none'; // إخفاء قائمة الخيارات بعد الاختيار
+
+            const width = screen.width;
+            const height = screen.height;
+
+            // حساب مكان النافذة
+            let left = 0;
+            let top = 0;
+            let newWidth = width;
+            let newHeight = height;
+
+            if (option === 'fullscreen') {
+                left = 0;
+                top = 0;
+                newWidth = width;
+                newHeight = height;
+            } else if (option === 'normal') {
+                newWidth = 800;
+                newHeight = 600;
+                left = (width - newWidth) / 2;
+                top = (height - newHeight) / 2;
+            } else if (option === 'right-half') {
+                // تكبير نصف الشاشة من الجهة اليمنى
+                newWidth = width / 2;
+                left = width / 2; // الجهة اليمنى
+                top = 0;
+                newHeight = height;
+            } else if (option === 'left-half') {
+                // تكبير نصف الشاشة من الجهة اليسرى
+                newWidth = width / 2;
+                left = 0; // الجهة اليسرى
+                top = 0;
+                newHeight = height;
+            } else if (option === 'bottom-half') {
+                // تكبير نصف الشاشة من الأسفل
+                newHeight = height / 2;
+                left = 0;
+                top = height / 2; // الأسفل
+                newWidth = width;
+            } else if (option === 'top-half') {
+                // تكبير نصف الشاشة من الأعلى
+                newHeight = height / 2;
+                left = 0;
+                top = 0; // الأعلى
+                newWidth = width;
+            } else if (option === 'top-right-quarter') {
+                // ربع الشاشة من الزاوية العلوية اليمنى
+                newWidth = width / 2;
+                newHeight = height / 2;
+                left = width / 2; // الجهة اليمنى
+                top = 0; // الزاوية العلوية
+            } else if (option === 'bottom-right-quarter') {
+                // ربع الشاشة من الزاوية السفلية اليمنى
+                newWidth = width / 2;
+                newHeight = height / 2;
+                left = width / 2; // الجهة اليمنى
+                top = height / 2; // الزاوية السفلية
+            } else if (option === 'top-left-quarter') {
+                // ربع الشاشة من الزاوية العلوية اليسرى
+                newWidth = width / 2;
+                newHeight = height / 2;
+                left = 0; // الجهة اليسرى
+                top = 0; // الزاوية العلوية
+            } else if (option === 'bottom-left-quarter') {
+                // ربع الشاشة من الزاوية السفلية اليسرى
+                newWidth = width / 2;
+                newHeight = height / 2;
+                left = 0; // الجهة اليسرى
+                top = height / 2; // الزاوية السفلية
+            }
+
+            // تحريك وتغيير حجم النافذة بناءً على الخيار
+            window.moveTo(left, top);
+            window.resizeTo(newWidth, newHeight);
         }
     </script>
 
