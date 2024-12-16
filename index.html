@@ -28,41 +28,26 @@
     </div>
 
     <script>
-               // إغلاق التطبيق
-        function closeWindow() {
+           // إغلاق التطبيق
+           function closeWindow() {
             window.close();
         }
 
-        // تكبير النافذة وتحديد موقعها في المنتصف
+        // تكبير النافذة إلى النصف
         function maximizeWindow() {
-            // تحديد أبعاد الشاشة
-            var width = screen.width;
-            var height = screen.height;
+            let screenWidth = screen.width;
+            let screenHeight = screen.height;
+            let newWidth = screenWidth / 2; // نصف عرض الشاشة
+            let newHeight = screenHeight / 2; // نصف ارتفاع الشاشة
 
-            // تحديد أبعاد النافذة الجديدة
-            var newWidth = width / 2; // نصف عرض الشاشة
-            var newHeight = height / 2; // نصف ارتفاع الشاشة
-
-            // حساب الموضع لجعل النافذة في المنتصف
-            var left = (width - newWidth) / 2;
-            var top = (height - newHeight) / 2;
-
-            // تكبير النافذة إلى النصف وتوسيطها
-            window.moveTo(left, top);
-            window.resizeTo(newWidth, newHeight);
+            // تغيير حجم وموقع النافذة
+            window.moveTo(screenWidth / 4, screenHeight / 4); // وضع النافذة في المنتصف
+            window.resizeTo(newWidth, newHeight); // تكبير النافذة إلى النصف
         }
 
-        // تصغير النافذة وتحديد موقعها في المنتصف
+        // تصغير النافذة
         function minimizeWindow() {
-            // يمكن استخدام نفس الحساب لجعل النافذة في المنتصف عند تصغيرها
-            var width = 800;  // الحجم الافتراضي عند التصغير
-            var height = 600; // الحجم الافتراضي عند التصغير
-
-            var left = (screen.width - width) / 2;
-            var top = (screen.height - height) / 2;
-
-            window.moveTo(left, top);
-            window.resizeTo(width, height);
+            window.blur(); // يجعل النافذة في الخلفية (تصغيرها)
         }
     </script>
 
