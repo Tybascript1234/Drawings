@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('toggleBtn3').addEventListener('click', () => toggleDiv('box3'));
     document.getElementById('toggleBtn4').addEventListener('click', () => toggleDiv('box4'));
     document.getElementById('toggleBtn5').addEventListener('click', () => toggleDiv('box5'));
+    document.getElementById('toggleBtn6').addEventListener('click', () => toggleDiv('box6'));
     document.getElementById('acuont').addEventListener('click', () => toggleDiv('acuonts'));
 
     overlay.addEventListener('click', () => {
