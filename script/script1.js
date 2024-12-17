@@ -74,7 +74,9 @@ function showContent(contentNumber) {
 
   // إظهار العنصر المحدد
   var selectedContent = document.getElementById('content' + contentNumber);
-  selectedContent.style.display = 'block';
+  if (selectedContent) {
+    selectedContent.style.display = 'block';
+  }
 
   // تغيير لون الزر الذي تم الضغط عليه
   var activeButton = document.querySelector(`#container${contentNumber} .show-button`);
@@ -86,7 +88,9 @@ function showContent(contentNumber) {
 function closeDiv(contentNumber) {
   // إخفاء المحتوى المحدد
   var selectedContent = document.getElementById('content' + contentNumber);
-  selectedContent.style.display = 'none';
+  if (selectedContent) {
+    selectedContent.style.display = 'none';
+  }
 
   // إخفاء الأزرار (إغلاق وإظهار) الخاصة بالديف
   var showButton = document.querySelector(`#container${contentNumber} .show-button`);
@@ -103,6 +107,22 @@ function closeDiv(contentNumber) {
   if (showButton) {
     showButton.classList.remove('xxx');
   }
+
+  // التحقق إذا تم إغلاق جميع الديفات
+  var contents = document.querySelectorAll('.content');
+  var allClosed = Array.from(contents).every(function(content) {
+    return content.style.display === 'none';
+  });
+
+  if (allClosed) {
+    console.log("All content divs are closed.");
+    // هنا يمكنك إضافة أي منطق إضافي إذا كنت ترغب في تنفيذ شيء عند إغلاق جميع المحتويات.
+  } else {
+    // عرض المحتوى الخاص بالديف التالي
+    var totalContents = contents.length;
+    var nextContentNumber = (contentNumber % totalContents) + 1; // تحديد الديف التالي (مع إعادة التدوير إلى الأول إذا كان الأخير)
+    showContent(nextContentNumber);
+  }
 }
 
 function toggleShowButton(contentNumber) {
@@ -118,6 +138,9 @@ function toggleShowButton(contentNumber) {
       // عرض الأزرار
       showButton.style.display = 'flex';
       closeButton.style.display = 'flex';
+
+      // عرض المحتوى عند الضغط
+      showContent(contentNumber);
     } else {
       console.error("Buttons not found in container", contentNumber);
     }
