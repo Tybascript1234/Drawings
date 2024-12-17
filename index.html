@@ -24,7 +24,7 @@
             <button title="تصغير" onclick="maximizeWindow('normal')"><img style="height: 18px;" src="image/cl.svg" alt=""></button>
             <button title="تقليل" onclick="minimizeWindow()"><ion-icon name="remove-outline"></ion-icon></button>
             <div class="zoo">
-                <button title="تكبير" onclick="maximizeWindow('fullscreen')"><ion-icon name="stop-outline"></ion-icon></button>
+                <button title="تكبير" onclick="maximizeWindow()"><ion-icon name="stop-outline"></ion-icon></button>
                 <div id="maximizeOptions" class="dropdown">
                     <a class="sos"><label onclick="maximizeWindow('top-half')"><img src="image/Splice-logo.png" alt=""></label><label onclick="maximizeWindow('bottom-half')" style="margin: 0;"><img src="image/Splice-logo.png" alt=""></label></a>
                     <a><label onclick="maximizeWindow('left-half')" style="padding: 27px;"><img src="image/Splice-logo.png" alt=""></label><label onclick="maximizeWindow('right-half')" style="margin: 0;padding: 27px;"><img src="image/Splice-logo.png" alt=""></label></a>
@@ -37,7 +37,7 @@
     </div>
 
     <script>
-       // إغلاق التطبيق
+        // إغلاق التطبيق
 function closeWindow() {
     window.close();
 }
@@ -144,7 +144,7 @@ function maximizeWindow(option) {
             <div class="content1">
                 <div class="content1-list">
                     <div class="filter"><button class="flex zo"><ion-icon name="filter-outline"></ion-icon></button></div>
-                    <button class="back"><ion-icon name="caret-back-outline"></ion-icon></button>
+                    <button class="back zo flex"><ion-icon name="caret-back-outline"></ion-icon></button>
 
                     <!-- window -->
                     <div class="window">
@@ -157,8 +157,9 @@ function maximizeWindow(option) {
                         <button class="window-add flex zo" id="showAkolBtn" title="New tab"><ion-icon name="add-outline"></ion-icon></button>
                     </div>
 
-                    <button class="back"><ion-icon name="caret-forward-outline"></ion-icon></button>
+                    <button class="back zo flex"><ion-icon name="caret-forward-outline"></ion-icon></button>
                     <div class="back-button">
+                        <button class="flex dom" id="toggleBtn6"><ion-icon name="add-outline"></ion-icon><span>جديد</span></button>
                         <button class="zo" onclick="undo()"><ion-icon name="arrow-back-outline"></ion-icon></button>
                         <button class="zo" onclick="redo()"><ion-icon name="arrow-forward-outline"></ion-icon></button>
                         <button class="zo" id="resetCanvasBtn"><i class="fi fi-br-rotate-right"></i></button>
@@ -246,6 +247,14 @@ function maximizeWindow(option) {
                     <g></g>
                     <div class="Edit" id="enableAutoSave"><a>Ok</a><span>تفعيل الحفظ التلقائي</span></div>
                     <div class="Edit" id="disableAutoSave"><a style="color: rgb(243, 48, 48);">Cancel</a><span>الغاء الحفظ التلقائي</span></div>
+                </div>
+                
+                <!-- 7 -->
+                <div class="history-div box" id="box6">
+                    <div class="Edit" style="justify-content: right;"><span>👋 كيف حالك</span></div>
+                    <g></g>
+                    <div class="Edit"><a>انشئ</a><span>حساب جديد</span></div>
+                    <div class="Edit"><a>الغاء</a><span>الغاء الإشتارك</span></div>
                 </div>
             </div>
 
