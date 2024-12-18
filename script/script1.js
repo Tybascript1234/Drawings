@@ -1,60 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const overlay = document.createElement('div');
-    overlay.classList.add('overlay');
-    document.body.appendChild(overlay);
+  function toggleDiv(divId) {
+      const div = document.getElementById(divId);
 
-    function toggleDiv(divId) {
-        const allBoxes = document.querySelectorAll('.box');
-        allBoxes.forEach((div) => {
-            div.style.display = 'none';
-            div.style.opacity = 0;
-            div.style.transform = 'translateX(-0%) translateY(-20px)';
-        });
+      // التبديل بين إظهار وإخفاء الصندوق عند الضغط على الزر
+      if (div.style.display === 'none' || div.style.display === '') {
+          // إذا كان مخفيًا أو لم يتم تحديده بعد، إظهاره
+          div.style.display = 'block';
 
-        const div = document.getElementById(divId);
-        div.style.display = 'none';
-        clearTimeout(div.dataset.timeoutId);
+          // إخفاء جميع الصناديق الأخرى
+          document.querySelectorAll('.box').forEach((otherDiv) => {
+              if (otherDiv !== div) {
+                  otherDiv.style.display = 'none';
+              }
+          });
+      } else {
+          // إذا كان ظاهرًا، أخفه
+          div.style.display = 'none';
+      }
+  }
 
-        const timeoutId = setTimeout(() => {
-            div.style.display = 'block';
-            overlay.style.display = 'block'; // إظهار الطبقة
-            setTimeout(() => {
-                div.style.opacity = 1;
-                div.style.transform = '';
-            }, 10);
-        }, 10);
+  // إضافة الأحداث للأزرار
+  document.getElementById('toggleBtn1').addEventListener('click', () => toggleDiv('box1'));
+  document.getElementById('toggleBtn2').addEventListener('click', () => toggleDiv('box2'));
+  document.getElementById('toggleBtn3').addEventListener('click', () => toggleDiv('box3'));
+  document.getElementById('toggleBtn4').addEventListener('click', () => toggleDiv('box4'));
+  document.getElementById('toggleBtn5').addEventListener('click', () => toggleDiv('box5'));
+  document.getElementById('toggleBtn6').addEventListener('click', () => toggleDiv('box6'));
+  document.getElementById('acuont').addEventListener('click', () => toggleDiv('acuonts'));
 
-        div.dataset.timeoutId = timeoutId;
-    }
+  // إخفاء الصناديق عند النقر خارجها
+  document.addEventListener('click', (event) => {
+      // تأكد من أن النقر خارج أي صناديق أو أزرار
+      if (!event.target.closest('.box') && !event.target.closest('button')) {
+          document.querySelectorAll('.box').forEach((div) => {
+              div.style.display = 'none';
+          });
+      }
+  });
 
-    document.getElementById('toggleBtn1').addEventListener('click', () => toggleDiv('box1'));
-    document.getElementById('toggleBtn2').addEventListener('click', () => toggleDiv('box2'));
-    document.getElementById('toggleBtn3').addEventListener('click', () => toggleDiv('box3'));
-    document.getElementById('toggleBtn4').addEventListener('click', () => toggleDiv('box4'));
-    document.getElementById('toggleBtn5').addEventListener('click', () => toggleDiv('box5'));
-    document.getElementById('toggleBtn6').addEventListener('click', () => toggleDiv('box6'));
-    document.getElementById('acuont').addEventListener('click', () => toggleDiv('acuonts'));
-
-    overlay.addEventListener('click', () => {
-        document.querySelectorAll('.box').forEach((div) => {
-            div.style.display = 'none';
-            div.style.opacity = 0;
-            div.style.transform = 'translateX(-0%) translateY(-20px)';
-        });
-        overlay.style.display = 'none'; // إخفاء الطبقة
-    });
-
-    document.addEventListener('click', (event) => {
-        if (!event.target.closest('.box') && !event.target.closest('button')) {
-            document.querySelectorAll('.box').forEach((div) => {
-                div.style.display = 'none';
-                div.style.opacity = 0;
-                div.style.transform = 'translateX(-0%) translateY(-20px)';
-            });
-            overlay.style.display = 'none'; // إخفاء الطبقة
-        }
-    });
+  // منع إخفاء الصندوق عند النقر داخله
+  document.querySelectorAll('.box').forEach((div) => {
+      div.addEventListener('click', (event) => {
+          // منع الحدث من الانتشار لكي لا يتسبب في إخفاء الصندوق عند النقر داخل الديف
+          event.stopPropagation();
+      });
+  });
 });
+
+
 
 
 
