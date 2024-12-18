@@ -171,3 +171,41 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   });
 });
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const texts = [
+      '👋 كيف حالك', 
+      'سيكون هناك تحديثات جديدة قريبا', 
+      'وتخفيضات تصل الى %50', 
+      'ولا تنسى ان تتابعنا على حساباتنا', 
+      'ساهم معنا', 
+      'ولا تنسى ان تدعو لإخواننا'
+  ];
+
+  const images = [
+      ['', ''], // صور للنص الأول
+      ['', ''], // صور للنص الثاني
+      ['', ''], // صور للنص الثالث
+      ['', ''], // صور للنص الرابع
+      ['', ''], // صور للنص الخامس
+      ['https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Palestine.svg/280px-Flag_of_Palestine.svg.png', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Flag_of_the_Syrian_revolution.svg/280px-Flag_of_the_Syrian_revolution.svg.png'] // صور للنص السادس
+  ];
+
+  let index = 0;
+  
+  setInterval(() => {
+      index = (index + 1) % texts.length;
+      document.getElementById('changing-text').textContent = texts[index];
+
+      // تغيير الصور بناءً على النص الحالي
+      const imageElements = document.querySelectorAll('#image-container img');
+      const currentImages = images[index];
+      imageElements.forEach((img, i) => {
+          img.src = currentImages[i];
+      });
+  }, 4000);  // تغيير النص والصور كل 3 ثوانٍ
+});
