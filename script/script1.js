@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // التبديل بين إظهار وإخفاء الصندوق عند الضغط على الزر
       if (div.style.display === 'none' || div.style.display === '') {
-          // إذا كان مخفيًا أو لم يتم تحديده بعد، إظهاره
           div.style.display = 'block';
 
           // إخفاء جميع الصناديق الأخرى
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
               }
           });
       } else {
-          // إذا كان ظاهرًا، أخفه
           div.style.display = 'none';
       }
   }
@@ -26,11 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('toggleBtn4').addEventListener('click', () => toggleDiv('box4'));
   document.getElementById('toggleBtn5').addEventListener('click', () => toggleDiv('box5'));
   document.getElementById('toggleBtn6').addEventListener('click', () => toggleDiv('box6'));
+  document.getElementById('toggleBtn7').addEventListener('click', () => toggleDiv('box7'));
+  document.getElementById('aass2').addEventListener('click', () => toggleDiv('aass'));
   document.getElementById('acuont').addEventListener('click', () => toggleDiv('acuonts'));
 
   // إخفاء الصناديق عند النقر خارجها
   document.addEventListener('click', (event) => {
-      // تأكد من أن النقر خارج أي صناديق أو أزرار
       if (!event.target.closest('.box') && !event.target.closest('button')) {
           document.querySelectorAll('.box').forEach((div) => {
               div.style.display = 'none';
@@ -41,12 +40,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // منع إخفاء الصندوق عند النقر داخله
   document.querySelectorAll('.box').forEach((div) => {
       div.addEventListener('click', (event) => {
-          // منع الحدث من الانتشار لكي لا يتسبب في إخفاء الصندوق عند النقر داخل الديف
           event.stopPropagation();
       });
   });
-});
 
+  // التعامل مع النقرات داخل الإطارات باستخدام طبقة شفافة
+  document.querySelectorAll('iframe').forEach((iframe) => {
+      const overlay = document.createElement('div');
+      overlay.style.position = 'absolute';
+      overlay.style.top = iframe.offsetTop + 'px';
+      overlay.style.left = iframe.offsetLeft + 'px';
+      overlay.style.width = iframe.offsetWidth + 'px';
+      overlay.style.height = iframe.offsetHeight + 'px';
+      overlay.style.zIndex = 9999;
+      overlay.style.background = 'transparent';
+
+      overlay.addEventListener('click', () => {
+          document.querySelectorAll('.box').forEach((div) => {
+              div.style.display = 'none';
+          });
+      });
+
+      iframe.parentNode.insertBefore(overlay, iframe);
+  });
+});
 
 
 
@@ -71,6 +88,10 @@ function showContent(contentNumber) {
   if (selectedContent) {
     selectedContent.style.display = 'block';
   }
+
+  // إظهار الأوفرليز
+  document.getElementById('overlay-top').style.display = 'block';
+  document.getElementById('overlay-bottom').style.display = 'block';
 
   // تغيير لون الزر الذي تم الضغط عليه
   var activeButton = document.querySelector(`#container${contentNumber} .show-button`);
@@ -101,6 +122,10 @@ function closeDiv(contentNumber) {
   if (showButton) {
     showButton.classList.remove('xxx');
   }
+
+  // إخفاء الأوفرليز
+  document.getElementById('overlay-top').style.display = 'none';
+  document.getElementById('overlay-bottom').style.display = 'none';
 
   // التحقق إذا تم إغلاق جميع الديفات
   var contents = document.querySelectorAll('.content');
