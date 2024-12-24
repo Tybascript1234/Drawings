@@ -13,11 +13,9 @@ function handleImageUpload(event) {
     imageElements = [];
     const previewContainer = document.getElementById('images-preview');
     previewContainer.innerHTML = '';
-
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const reader = new FileReader();
-
         reader.onload = function(e) {
             const imageSrc = e.target.result;
             const imageItem = document.createElement('div');
@@ -29,7 +27,6 @@ function handleImageUpload(event) {
             previewContainer.appendChild(imageItem);
             images.push({ src: imageSrc, time: 1000 }); // default 1 second
         };
-
         reader.readAsDataURL(file);
     }
 }
@@ -38,11 +35,9 @@ function addText() {
     const textInput = document.querySelector('.text-input');
     const timeInput = document.querySelector('.time-input-text');
     const positionInput = document.querySelector('.position-input');
-
     const text = textInput.value;
     const time = parseInt(timeInput.value) * 1000; // تحويل إلى ميلي ثانية
     const position = positionInput.value;
-
     if (text) {
         texts.push({ text, time, position });
         textInput.value = '';
@@ -55,7 +50,6 @@ function generateVideo() {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const fps = 30;
-
     const frames = [];
     let totalTime = 0;
 
@@ -64,18 +58,13 @@ function generateVideo() {
         const img = item.querySelector('img');
         const time = parseInt(item.querySelector('.time-input').value) * 1000;
         images[index].time = time;
-
-        const frame = {
-            image: img,
-            time: time
-        };
+        const frame = { image: img, time: time };
         frames.push(frame);
         totalTime += time;
     });
 
     canvas.width = 640;
     canvas.height = 480;
-
     const stream = canvas.captureStream(fps);
     const recorder = new MediaRecorder(stream);
     const videoChunks = [];
@@ -93,13 +82,36 @@ function generateVideo() {
     recorder.start();
 
     let currentTime = 0;
+
     frames.forEach((frame, index) => {
         const img = frame.image;
         const time = frame.time;
 
         setTimeout(() => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            // حساب النسب
+            const imgRatio = img.naturalWidth / img.naturalHeight;
+            const canvasRatio = canvas.width / canvas.height;
+
+            let drawWidth, drawHeight, offsetX, offsetY;
+
+            if (imgRatio > canvasRatio) {
+                // الصورة أعرض
+                drawWidth = canvas.width;
+                drawHeight = canvas.width / imgRatio;
+                offsetX = 0;
+                offsetY = (canvas.height - drawHeight) / 2;
+            } else {
+                // الصورة أطول
+                drawHeight = canvas.height;
+                drawWidth = canvas.height * imgRatio;
+                offsetX = (canvas.width - drawWidth) / 2;
+                offsetY = 0;
+            }
+
+            // رسم الصورة بأبعادها الأصلية مع المركزية
+            ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 
             // إضافة النصوص في الوقت المحدد
             texts.forEach((textObj) => {
@@ -108,11 +120,9 @@ function generateVideo() {
                     ctx.fillStyle = 'white';
                     const x = textObj.position.includes('left') ? 10 : canvas.width - 10 - ctx.measureText(textObj.text).width;
                     const y = textObj.position.includes('top') ? 30 : canvas.height - 30;
-
                     ctx.fillText(textObj.text, x, y);
                 }
             });
-
         }, currentTime);
 
         currentTime += time;
@@ -130,3 +140,27 @@ function downloadVideo() {
     link.download = 'converted_video.webm';
     link.click();
 }
+التعديلات المضافة:
+الحفاظ على أبعاد الصورة الأصلية:
+
+تم استخدام naturalWidth وnaturalHeight لحساب نسب أبعاد الصورة الأصلية.
+التوسيط:
+
+يتم ضبط الإزاحة (offsetX وoffsetY) لتوسيط الصورة داخل الفيديو.
+النصوص:
+
+النصوص تُضاف بناءً على توقيت ومكان النصوص المحدد مسبقًا.
+ملاحظات:
+تأكد من أن الصور المرفوعة تحتوي على أبعاد واضحة (أي أنها ليست صور تالفة أو غير مدعومة).
+النصوص تُظهر في المواقع المحددة (أعلى/أسفل، يمين/يسار) بناءً على اختيار المستخدم.
+
+
+
+
+
+
+
+
+
+
+يمكن أن تصدر عن ChatGPT بعض الأخطاء. لذلك يجب التحقق من المعلومات المهمة
