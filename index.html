@@ -10,6 +10,7 @@
      <link rel="stylesheet" href="css/screen.css">
     <!-- link-js -->
      <script src="script/script1.js"></script>
+     <script src="script/script2.js"></script>
     <!-- link-icon -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
@@ -140,42 +141,76 @@ function maximizeWindow(option) {
     </script>
 
     <div class="contenter">
+        <div class="godn" id="reload-message">
+            <div style="justify-content: left;margin-bottom: 10px;"><div class="logo-app flex"><span class="logo1 flex"><span></span></span></div><span>Featured Apps</span></div>
+            <div>استعادة الصفحات السابقه</div>
+            <div><button id="restore-button">restoration</button></div>
+        </div>
+
         <!-- 1 -->
             <div class="content1">
                 <div class="content1-list">
-                    <div class="filter"><button class="flex zo"><ion-icon name="chevron-down-outline"></ion-icon></button></div>
+                    <div class="filter">
+                        <button class="flex zo"><ion-icon name="chevron-down-outline"></ion-icon></button>
+                        <div class="onlye">
+                            <div class="onlye1 flex">
+                                <div><ion-icon name="chevron-down-outline"></ion-icon><input type="text"></div>
+                                <span></span>
+                            </div>
+                            <div class=""></div>
+                        </div>
+                    </div>
                     <button class="back zo flex"><ion-icon name="caret-back-outline"></ion-icon></button>
 
                     <!-- window -->
                     <div class="window">
+                        <div class="uoser">
+                           <button style="padding: 0;border: none;height: 20px;background: #0000;"><icon style="position: relative;margin-right: 8px;box-shadow: none;margin-bottom: 0;" class="button1 v" id="toggleBtn7"></icon></button> 
+                           <ul class="box" id="box7">
+                            <a>العربية</a>
+                            <a>الإنجليزية</a>
+                            <a>الروسية</a>
+                            <a>الكورية</a>
+                           </ul>
+                        </div>
+                        
                         <div>
                             <div>
                                 <div id="container1" class="content-wrapper"> <div class="Open_tap show-button" onclick="showContent(1)"> <a class="v"> <img src="image/1.png" alt=""> <span>قص خلفية الصور</span> </a> </div> <button class="flex zo close-button" onclick="closeDiv(1)"> <ion-icon name="close"></ion-icon> </button> </div>
                                 <div id="container2" class="content-wrapper"> <div class="Open_tap show-button" onclick="showContent(2)"> <a class="v"> <img src="image/2.png" alt=""> <span>PDF تعديل ملف</span> </a> </div> <button class="flex zo close-button" onclick="closeDiv(2)"> <ion-icon name="close"></ion-icon> </button> </div>
+                                <div id="container3" class="content-wrapper"> <div class="Open_tap show-button" onclick="showContent(3)"> <a class="v"> <img src="image/3.png" alt=""> <span>PDF انشاء فيدو</span> </a> </div> <button class="flex zo close-button" onclick="closeDiv(3)"> <ion-icon name="close"></ion-icon> </button> </div>
+                                <div id="container4" class="content-wrapper"> <div class="Open_tap show-button" onclick="showContent(4)"> <a class="v"> <img src="https://tybascript1234.github.io/Qr-1/New%20Project.png" alt=""> <span>Quran recited</span> </a> </div> <button class="flex zo close-button" onclick="closeDiv(4)"> <ion-icon name="close"></ion-icon> </button> </div>
+                                <div id="container5" class="content-wrapper"> <div class="Open_tap show-button" onclick="showContent(5)"> <a class="v"> <img src="image/download2.png" alt=""> <span>TaibahCart</span> </a> </div> <button class="flex zo close-button" onclick="closeDiv(5)"> <ion-icon name="close"></ion-icon> </button> </div>
+                                <div id="container6" class="content-wrapper"> <div class="Open_tap show-button" onclick="showContent(6)"> <a class="v"> <img src="https://cdn-icons-png.flaticon.com/256/3177/3177440.png" alt=""> <span>Log in</span> </a> </div> <button class="flex zo close-button" onclick="closeDiv(6)"> <ion-icon name="close"></ion-icon> </button> </div>
                             </div>
                         </div>
                         <button class="window-add flex zo" id="showAkolBtn" title="New tab"><ion-icon name="add-outline"></ion-icon></button>
                     </div>
 
                     <button class="back zo flex"><ion-icon name="caret-forward-outline"></ion-icon></button>
-                    <div class="back-button">
-                        <div class="op">
-                            <button class="flex dom" id="toggleBtn6"><ion-icon name="add-outline"></ion-icon><span>اخرى</span></button>
-                            <!-- 7 -->
-                            <div class="history-div box" style="top: 47px;display: none;height: auto;right: 0;" id="box6">
-                                <div class="Edit" style="justify-content: right;height: 38px;"><div id="image-container"><img id="changing-image1" src="" alt=""><img id="changing-image2" src="" style="margin-right: 10px;"></div><span id="changing-text">👋 كيف حالك</span></div>
-                                <g></g>
-                                <div style="height: 38px;" class="Edit"><a>شارك</a><span>شارك ما فعلته</span></div>
-                                <g></g>
-                                <div style="height: 38px;" class="Edit"><a>انشئ</a><span>حساب جديد</span></div>
-                                <div style="height: 38px;" class="Edit"><a style="color: rgb(243, 48, 48);">الغاء</a><span>الغاء الإشتارك</span></div>
+
+                    <div class="goo">
+                        <div class="gox" id="overlay-bottom"></div>
+                       <div class="back-button">
+                            <div class="op">
+                                <button class="flex dom" id="toggleBtn6"><ion-icon name="add-outline"></ion-icon><span>اخرى</span></button>
+                                <!-- 7 -->
+                                <div class="history-div box" style="top: 47px;display: none;height: auto;right: 0;" id="box6">
+                                    <div class="Edit" style="justify-content: right;height: 38px;"><div id="image-container"><img id="changing-image1" src="" alt=""><img id="changing-image2" src="" style="margin-right: 10px;"></div><span id="changing-text">👋 كيف حالك</span></div>
+                                    <g></g>
+                                    <div style="height: 38px;" class="Edit"><a>شارك</a><span>شارك ما فعلته</span></div>
+                                    <g></g>
+                                    <div style="height: 38px;" class="Edit"><a>انشئ</a><span>حساب جديد</span></div>
+                                    <div style="height: 38px;" class="Edit"><a style="color: rgb(243, 48, 48);">الغاء</a><span>الغاء الإشتارك</span></div>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <button class="zo" onclick="undo()"><ion-icon name="arrow-back-outline"></ion-icon></button>
-                        <button class="zo" onclick="redo()"><ion-icon name="arrow-forward-outline"></ion-icon></button>
-                        <button class="zo" id="resetCanvasBtn"><i class="fi fi-br-rotate-right"></i></button>
+
+                            <button class="zo" onclick="undo()"><ion-icon name="arrow-back-outline"></ion-icon></button>
+                            <button class="zo" onclick="redo()"><ion-icon name="arrow-forward-outline"></ion-icon></button>
+                            <button class="zo" id="resetCanvasBtn"><i class="fi fi-br-rotate-right"></i></button>
+                        </div> 
                     </div>
+                    
                 </div>
                 <div class="content1-div">
                     <div class="content1-div-div"><div class="flex"><a class="so" style="margin-right: 10px;"></a><span>عرض خاص لفترة محدودة جميع ادوات التعديل مجانية</span></div></div>
@@ -191,6 +226,10 @@ function maximizeWindow(option) {
                     <!-- --------------------- -->
                     <div id="content1" class="content xxf"><div id="contentex1"></div></div>
                     <div id="content2" class="content xxf"><div id="contentex2"></div></div>
+                    <div id="content3" class="content xxf"><div id="contentex3"></div></div>
+                    <div id="content4" class="content xxf"><div id="contentex4"></div></div>
+                    <div id="content5" class="content xxf"><div id="contentex5"></div></div>
+                    <div id="content6" class="content xxf"><div id="contentex6"></div></div>
                     
                 </div>
 
@@ -202,7 +241,7 @@ function maximizeWindow(option) {
                    <button class="flex button1 v zo" id="acuont"><span class="logen"><span></span></span></button> 
                     <!-- 6 -->
                     <div class="history-div box" style="top: 37px" id="acuonts">
-                        <div class="Edit acuont-div"><a>تسجيل الدخول</a><div class="acuont"><span class="logen"><span></span></span></div></div>
+                        <div class="Edit acuont-div"><a onclick="toggleShowButton(6)">تسجيل الدخول</a><div class="acuont"><span class="logen"><span></span></span></div></div>
                         <g></g>
                         <div class="Edit"><a>ادعمنا</a><span>ادعمنا لنستمر</span></div>
                         <div class="Edit"><a>مساهمة</a><span>ساهم معنا</span></div>
@@ -213,78 +252,82 @@ function maximizeWindow(option) {
                     </div>
                 </div>
 
-                <div class="op">
-                    <button class="flex button1 v zo" id="toggleBtn4" style="font-size: 24px;"><ion-icon name="add-outline"></ion-icon></button>
-                    <!-- 4 -->
-                    <div class="history-div box" id="box4">
-                        <label for="upload" class="Edit"><a>Add</a><span>اضف صورة</span></label>
-                        <input type="file" class="haden" id="upload" accept="image/*" />
-                        <div onclick="addText()" class="Edit"><a>Add</a><span>اضف نص</span></div>
-                        <div onclick="addShadow()" class="Edit"><a>Add</a><span>اضف ظل</span></div>
-                        <g></g>
-                        <div onclick="removeShadow()" class="Edit"><a>Ok</a><span>ازالة الظل</span></div>
-                    </div>
-                </div>
-
-                <button class="flex button1 v zo" onclick="duplicate()"><ion-icon name="copy-outline"></ion-icon></button>
-                <div class="op">
-                    <button class="flex button1 v zo" id="toggleBtn3"><ion-icon name="brush-outline"></ion-icon></button>
-                    <!-- 3 -->
-                    <div class="history-div box" id="box3">
-                        <label for="textColor" class="Edit"><a>Edit</a><span>لون النص</span></label>
-                        <input type="color" class="haden" id="textColor" value="#000000" onchange="changeTextColor()"/>
-                        <label for="shapeColor" class="Edit"><a>Edit</a><span>لون الشكل</span></label>
-                        <input type="color" class="haden" id="shapeColor" value="#ff0000" onchange="changeShapeColor()"/>
-                        <div onclick="changeColor()" class="Edit"><a>Edit</a><span>لون الخلفية</span></div>
-                        <g></g>
-                        <label for="shapeOpacity" class="Edit"><a><input type="range" id="shapeOpacity" min="0" max="1" step="0.01" value="1" onchange="changeShapeOpacity()"/></a><span>شفافية الشكل</span></label>
-                        <div onclick="changeOpacity()" class="Edit"><a>Edit</a><span>شفافية الخلفية</span></div>
-                        <g></g>
-                        <div class="Edit">
-                            <select class="input" id="textAlign" onchange="changeTextAlignment()">
-                                <option value="left">يسار</option>
-                                <option value="center">منتصف</option>
-                                <option value="right">يمين</option>
-                            </select>
-                            <span>محاذاة النص</span>
+                <div class="goo">
+                    <div class="gox" id="overlay-top"></div>
+                        <div class="op">
+                        <button class="flex button1 v zo" id="toggleBtn4" style="font-size: 24px;"><ion-icon name="add-outline"></ion-icon></button>
+                        <!-- 4 -->
+                        <div class="history-div box" id="box4">
+                            <label for="upload" class="Edit"><a>Add</a><span>اضف صورة</span></label>
+                            <input type="file" class="haden" id="upload" accept="image/*" />
+                            <div onclick="addText()" class="Edit"><a>Add</a><span>اضف نص</span></div>
+                            <div onclick="addShadow()" class="Edit"><a>Add</a><span>اضف ظل</span></div>
+                            <g></g>
+                            <div onclick="removeShadow()" class="Edit"><a>Ok</a><span>ازالة الظل</span></div>
                         </div>
-                        <div class="Edit"><input class="input" type="number" id="textSize" value="20" min="10" max="100" onchange="changeTextSize()"/><span>حجم النص</span></div>
-                        <g></g>
-                        <div onclick="lock()" class="Edit"><a>Edit</a><span>اضافة قفل</span></div>
-                        <div onclick="unlock()" class="Edit" style="display: none;"><a style="color: rgb(245, 63, 63);">Delete</a><span>الغاء قفل</span></div>
                     </div>
-                </div>
-
-                <div class="op">
-                    <button class="flex button1 v zo" id="toggleBtn1"><ion-icon name="shapes-outline"></ion-icon></button>
-                    <!-- 1 -->
-                    <div class="history-div box" id="box1"><div id="shapesContainer"></div></div>
-                </div>
-
-                <div class="op">
-                    <button class="flex button1 v zo" id="toggleBtn5"><ion-icon name="download-outline"></ion-icon></button>
-                    <!-- 5 -->
-                    <div class="history-div box" id="box5">
-                        <div class="Edit" onclick="downloadAsImage()"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/9205/9205302.png" alt=""></div>
-                        <g></g>
-                        <div class="Edit" onclick="downloadAsPSD()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/512px-Adobe_Photoshop_CC_icon.svg.png?20200616073617" alt=""></div>
-                        <div class="Edit" onclick="downloadAsPremiere()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/2101px-Adobe_Premiere_Pro_CC_icon.svg.png" alt=""></div>
-                        <div class="Edit" onclick=""><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/1200px-Adobe_Illustrator_CC_icon.svg.png" alt=""></div>
-                        <div class="Edit" onclick=""><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Adobe_InDesign_CC_icon.svg/1200px-Adobe_InDesign_CC_icon.svg.png" alt=""></div>
-                        <div class="Edit" onclick=""><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/1014/1014296.png" alt=""></div>
-                        <g></g>
-                        <div class="Edit"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/5968/5968775.png" alt=""></div>
-                        <div class="Edit"><a>Download</a><img src="https://files.raycast.com/l1wnrfl0ui0xczjl1mk4qt28ow2t" alt=""></div>
+                
+                    <button class="flex button1 v zo" onclick="duplicate()"><ion-icon name="copy-outline"></ion-icon></button>
+                    <div class="op">
+                        <button class="flex button1 v zo" id="toggleBtn3"><ion-icon name="brush-outline"></ion-icon></button>
+                        <!-- 3 -->
+                        <div class="history-div box" id="box3">
+                            <label for="textColor" class="Edit"><a>Edit</a><span>لون النص</span></label>
+                            <input type="color" class="haden" id="textColor" value="#000000" onchange="changeTextColor()"/>
+                            <label for="shapeColor" class="Edit"><a>Edit</a><span>لون الشكل</span></label>
+                            <input type="color" class="haden" id="shapeColor" value="#ff0000" onchange="changeShapeColor()"/>
+                            <div onclick="changeColor()" class="Edit"><a>Edit</a><span>لون الخلفية</span></div>
+                            <g></g>
+                            <label for="shapeOpacity" class="Edit"><a><input type="range" id="shapeOpacity" min="0" max="1" step="0.01" value="1" onchange="changeShapeOpacity()"/></a><span>شفافية الشكل</span></label>
+                            <div onclick="changeOpacity()" class="Edit"><a>Edit</a><span>شفافية الخلفية</span></div>
+                            <g></g>
+                            <div class="Edit">
+                                <select class="input" id="textAlign" onchange="changeTextAlignment()">
+                                    <option value="left">يسار</option>
+                                    <option value="center">منتصف</option>
+                                    <option value="right">يمين</option>
+                                </select>
+                                <span>محاذاة النص</span>
+                            </div>
+                            <div class="Edit"><input class="input" type="number" id="textSize" value="20" min="10" max="100" onchange="changeTextSize()"/><span>حجم النص</span></div>
+                            <g></g>
+                            <div onclick="lock()" class="Edit"><a>Edit</a><span>اضافة قفل</span></div>
+                            <div onclick="unlock()" class="Edit" style="display: none;"><a style="color: rgb(245, 63, 63);">Delete</a><span>الغاء قفل</span></div>
+                        </div>
                     </div>
+                
+                    <div class="op">
+                        <button class="flex button1 v zo" id="toggleBtn1"><ion-icon name="shapes-outline"></ion-icon></button>
+                        <!-- 1 -->
+                        <div class="history-div box" id="box1"><div id="shapesContainer"></div></div>
+                    </div>
+                
+                    <div class="op">
+                        <button class="flex button1 v zo" id="toggleBtn5"><ion-icon name="download-outline"></ion-icon></button>
+                        <!-- 5 -->
+                        <div class="history-div box z4" id="box5">
+                            <div class="Edit" onclick="downloadAsImage()"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/9205/9205302.png" alt=""></div>
+                            <g></g>
+                            <div class="Edit" onclick="downloadAsPSD()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/512px-Adobe_Photoshop_CC_icon.svg.png?20200616073617" alt=""></div>
+                            <div class="Edit" onclick="downloadAsPremiere()"><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/2101px-Adobe_Premiere_Pro_CC_icon.svg.png" alt=""></div>
+                            <div class="Edit" onclick=""><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/1200px-Adobe_Illustrator_CC_icon.svg.png" alt=""></div>
+                            <div class="Edit" onclick=""><a>Download</a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Adobe_InDesign_CC_icon.svg/1200px-Adobe_InDesign_CC_icon.svg.png" alt=""></div>
+                            <div class="Edit" onclick=""><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/1014/1014296.png" alt=""></div>
+                            <g></g>
+                            <div class="Edit"><a>Download</a><img src="https://cdn-icons-png.flaticon.com/512/5968/5968775.png" alt=""></div>
+                            <div class="Edit"><a>Download</a><img src="https://files.raycast.com/l1wnrfl0ui0xczjl1mk4qt28ow2t" alt=""></div>
+                        </div>
+                    </div>
+                
+                    <div class="op">
+                        <button class="flex button1 v zo" id="toggleBtn2"><span class="material-symbols-outlined"> history </span></button>
+                        <!-- 2 -->
+                        <div class="history-div box" id="box2" style="width: auto;"><div id="lockedItemsContainer"></div></div>
+                    </div>
+                
+                    <button class="flex button1 v zo" onclick="deleteObjects()"><ion-icon name="trash-outline"></ion-icon></button>
                 </div>
-
-                <div class="op">
-                    <button class="flex button1 v zo" id="toggleBtn2"><span class="material-symbols-outlined"> history </span></button>
-                    <!-- 2 -->
-                    <div class="history-div box" id="box2" style="width: auto;"><div id="lockedItemsContainer"></div></div>
-                </div>
-
-                <button class="flex button1 v zo" onclick="deleteObjects()"><ion-icon name="trash-outline"></ion-icon></button>
+                
             </div>
 
 
@@ -295,37 +338,84 @@ function maximizeWindow(option) {
      <div id="akol-overlay">
      <div id="akol-popup" class="show">
         <div class="omly">
-            <div class="v"><img src="image/Splice-logo.png" style="height: 25px; border-radius: 6px; margin-right: 10px;" alt=""><span>Drawings</span></div>
+            <div class="v"><div class="logo-app flex"><span class="logo1 flex"><span></span></span></div><span>Featured Apps</span></div>
             <div>
-                <div class="acuont flex zo"><span class="logen"><span></span></span></div>
+                <div class="op">
+                    <button class="acuont button1 flex zo v" id="aass2"><span class="logen"><span></span></span></button>
+                    <!-- 7 -->
+                    <div class="history-div box" id="aass" style="display: none;">
+                        <div class="Edit"><a>ارسال طلب</a><span>ساهم بإضافه</span></div>
+                        <div class="Edit"><a>قراءة</a><span>سياسة الخصوصية</span></div>
+                        <g></g>
+                        <div class="Edit"><a style="color: rgb(243, 48, 48);">ابلغ</a><span>ابلاغ عن مشكلة</span></div>
+                    </div>
+                </div>
                 <button id="closeAkolBtn" class="flex button1 v zo"><ion-icon name="close-outline"></ion-icon></button>
             </div>
         </div>
         <!-- <h2>تصفح إضافاتنا بضغطة زر</h2> -->
         <div class="toggle-button" style="margin: 16px;">
-            <div class="Background">
+            <div class="Background v">
                 <div class="Background-div" style="background-image: url(image/download\ \(1\).png);"><span></span><img src="image/download (2).png" alt=""></div>
                 <div class="show-div">
                   <img src="image/1.png" alt="">
                   <br>
-                  <button onclick="toggleShowButton(1)">Open</button><span>قص خلفية الصور</span>
+                  <a><icon></icon> Featured Apps المطور</a>
+                  <br>
+                  <button onclick="toggleShowButton(1)">Open</button><span class="zom">قص خلفية الصور</span>
                   <span class="on"></span>
                 </div>
             </div>
             
-            <div class="Background">
+            <div class="Background v">
                 <div class="Background-div"><img src="https://www.almowaten.net/wp-content/uploads/2020/09/%D8%AA%D8%AD%D9%88%D9%8A%D9%84-%D8%B5%D9%88%D8%B1%D8%A9-%D8%A7%D9%84%D9%89-pdf.jpg" alt=""></div>
                 <div class="show-div">
                   <img src="image/2.png" alt="">
                   <br>
-                  <button onclick="toggleShowButton(2)">Open</button><span>PDF تعديل ملف</span>
+                  <a><icon></icon> Marquee المطور</a>
+                  <br>
+                  <button onclick="toggleShowButton(2)">Open</button><span class="zom">PDF تعديل ملف</span>
+                </div>
+            </div>
+            
+            <div class="Background v">
+                <div class="Background-div"><img src="https://media.screenpal.com/blog/wp-content/uploads/2020/01/13070818/animated-movies.gif" alt="" style="height: -webkit-fill-available;width: auto;"></div>
+                <div class="show-div">
+                  <img src="image/3.png" alt="">
+                  <br>
+                  <a><icon></icon> المطور عمر احمد</a>
+                  <br>
+                  <button onclick="toggleShowButton(3)">Open</button><span class="zom">mp4 + GIF  انشاء فيديو</span>
+                </div>
+            </div>
+
+            <div class="Background v">
+                <div class="Background-div"><img src="https://yallaapk.com/wp-content/uploads/2024/02/26-14.webp" alt="" style="height: -webkit-fill-available;width: auto;"></div>
+                <div class="show-div">
+                  <img src="https://tybascript1234.github.io/Qr-1/New%20Project.png" alt="">
+                  <br>
+                  <a><icon style="background-image: url(https://cdn-icons-png.flaticon.com/256/594/594903.png);"></icon>Creative Clouds IT المطور</a>
+                  <br>
+                  <button onclick="toggleShowButton(4)">Open</button><span class="zom">قرائة واستماع وتنزيل الرقرآن الكريم</span>
+                </div>
+            </div>
+
+            
+            <div class="Background v">
+                <div class="Background-div"><img src="https://d2ir6aubdks4z1.cloudfront.net/images/promo/39/Men_-_Mobile.jpg?t=1722075760" alt="" style="height: -webkit-fill-available;width: auto;"></div>
+                <div class="show-div">
+                  <img src="image/download2.png" alt="">
+                  <br>
+                  <a><icon style="background-image: url(https://cdn-icons-png.flaticon.com/256/594/594903.png);"></icon>Creative Clouds IT المطور</a>
+                  <br>
+                  <button onclick="toggleShowButton(5)">Open</button><span class="zom">TaibahCart</span>
                 </div>
             </div>
           </div>          
      </div>
     </div>
 
-    <script>
+<script>
         const canvas = new fabric.Canvas('canvas');
     let undoHistory = [];
     let redoHistory = [];
@@ -812,7 +902,11 @@ window.addEventListener('load', loadCanvasFromLocalStorage);
  // روابط متعددة لعرضها في الـ divs المختلفة
  const urls = [
       "image.html",  // الرابط الأول
-      "pdf.html"                 // الرابط الثاني
+      "pdf.html",
+      "video.html",
+      "https://tybascript1234.github.io/Qr-1/",                 // الرابط الثاني
+      "https://creativecloudsit.com/?srsltid=AfmBOoryx9INV5evNLKCM99QN71MDTqAPQNo9vhthw4aUT562Z5hDHH9",
+      "https://tybascript1234.github.io/settings/page1.html"    
     ];
 
     // دالة لإضافة iframe داخل div بناءً على الرابط
@@ -834,6 +928,18 @@ window.addEventListener('load', loadCanvasFromLocalStorage);
 
       // إضافة iframe للمحتوى الثاني
       addIframeToDiv("contentex2", urls[1]);
+
+      // إضافة iframe للمحتوى الثاني
+      addIframeToDiv("contentex3", urls[2]);
+
+      // إضافة iframe للمحتوى الثاني
+      addIframeToDiv("contentex4", urls[3]);
+      
+      // إضافة iframe للمحتوى الثاني
+      addIframeToDiv("contentex5", urls[4]);
+       
+      // إضافة iframe للمحتوى الثاني
+      addIframeToDiv("contentex6", urls[5]);
     };
 </script>
 </body>
