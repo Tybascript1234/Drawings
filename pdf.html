@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PDF Watermark Remover</title>
+  <link rel="stylesheet" href="css/pdf.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script>
@@ -30,10 +31,13 @@
 </head>
 <body>
   <h1>PDF Watermark Remover</h1>
-  <input type="file" id="upload-pdf" accept="application/pdf">
-  <input type="text" id="pdf-url" placeholder="Enter PDF URL">
-  <button id="load-url">Load PDF from URL</button>
+  <label for="upload-pdf" class="slo">PDF رفع ملف</label>
+  <input type="file" id="upload-pdf" accept="application/pdf" class="" style="display: none;">
+  <input type="text" id="pdf-url" placeholder="Enter PDF URL" class="slo">
+  <button id="load-url" class="slo">Load PDF from URL</button>
+  <br>
   <canvas id="pdf-render"></canvas>
+  <br>
   <div id="watermarks">
     <h3>Detected Watermarks:</h3>
     <ul id="watermark-list"></ul>
@@ -42,8 +46,8 @@
     <h3>Extracted Links:</h3>
     <ul id="link-list"></ul>
   </div>
-  <button id="remove-watermarks" class="hidden">Remove Watermarks</button>
-  <button id="download-pdf" class="hidden">Download PDF Without Watermarks</button>
+  <button id="remove-watermarks" class="hidden slo">Remove Watermarks</button>
+  <button id="download-pdf" class="hidden slo">Download PDF Without Watermarks</button>
 
   <script>
     const uploadInput = document.getElementById('upload-pdf');
