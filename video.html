@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="css/video.css">
+    <!-- <script src="script/video.js"></script> -->
+</head>
+<body>
+    <div id="image-container">
+        <label for="image-upload" class="slo">رفع الصور</label>
+        <input type="file" style="display: none;" id="image-upload" multiple>
+        <button id="generate-video" class="slo">إنشاء الفيديو</button>
+    </div>
+    <div id="images-preview"></div>
+    <div>
+        <label for="quality-select">اختر الجودة:</label>
+        <select id="quality-select">
+            <option value="480">480p</option>
+            <option value="720">720p</option>
+            <option value="1080">1080p</option>
+        </select>
+    </div>
+    <div id="video-container">
+        <video id="output-video" controls></video>
+    </div>
+    <button id="download-video" class="slo" style="background: #4691f3; color: white; border-color: #0000;">تحميل الفيديو</button>
+
+
+    <script>
+       
+       let images = [];
+        let imageElements = [];
+
+        document.getElementById('image-upload').addEventListener('change', handleImageUpload);
+        document.getElementById('generate-video').addEventListener('click', generateVideo);
+        document.getElementById('download-video').addEventListener('click', downloadVideo);
+
+        function handleImageUpload(event) {
+            const files = event.target.files;
+            images = [];
+            imageElements = [];
+            const previewContainer = document.getElementById('images-preview');
+            previewContainer.innerHTML = '';
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imageSrc = e.target.result;
+                    const imageItem = document.createElement('button');
+                    imageItem.classList.add('image-item');
+                    imageItem.innerHTML = `
+                        <img src="${imageSrc}" />
+                        <input type="number" class="time-input" placeholder="ثانية" value="1">
+                    `;
+                    previewContainer.appendChild(imageItem);
+                    images.push({ src: imageSrc, time: 1000 }); // default 1 second
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function generateVideo() {
+            const video = document.getElementById('output-video');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const fps = 30;
+
+            // Get the selected quality from the dropdown
+            const selectedQuality = parseInt(document.getElementById('quality-select').value);
+            let canvasWidth, canvasHeight;
+
+            // Adjust canvas size based on the selected quality
+            if (selectedQuality === 480) {
+                canvasWidth = 640;
+                canvasHeight = 480;
+            } else if (selectedQuality === 720) {
+                canvasWidth = 1280;
+                canvasHeight = 720;
+            } else if (selectedQuality === 1080) {
+                canvasWidth = 1920;
+                canvasHeight = 1080;
+            }
+
+            const frames = [];
+            let totalTime = 0;
+
+            const imageItems = document.querySelectorAll('.image-item');
+            imageItems.forEach((item, index) => {
+                const img = item.querySelector('img');
+                const time = parseInt(item.querySelector('.time-input').value) * 1000;
+                images[index].time = time;
+
+                const frame = {
+                    image: img,
+                    time: time
+                };
+                frames.push(frame);
+                totalTime += time;
+            });
+
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+
+            const stream = canvas.captureStream(fps);
+            const recorder = new MediaRecorder(stream);
+            const videoChunks = [];
+
+            recorder.ondataavailable = function(e) {
+                videoChunks.push(e.data);
+            };
+
+            recorder.onstop = function() {
+                const videoBlob = new Blob(videoChunks, { type: 'video/webm' });
+                const videoUrl = URL.createObjectURL(videoBlob);
+                video.src = videoUrl;
+            };
+
+            recorder.start();
+
+            let currentTime = 0;
+
+            frames.forEach((frame, index) => {
+                const img = frame.image;
+                const time = frame.time;
+
+                setTimeout(() => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                }, currentTime);
+
+                currentTime += time;
+            });
+
+            setTimeout(() => {
+                recorder.stop();
+            }, totalTime);
+        }
+
+        function downloadVideo() {
+            const video = document.getElementById('output-video');
+            const link = document.createElement('a');
+            link.href = video.src;
+            link.download = 'converted_video.webm';
+            link.click();
+        }
+    </script>
+</body>
+</html>
