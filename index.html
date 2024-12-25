@@ -276,6 +276,7 @@ function maximizeWindow(option) {
                             <input type="color" class="haden" id="textColor" value="#000000" onchange="changeTextColor()"/>
                             <label for="shapeColor" class="Edit"><a>Edit</a><span>لون الشكل</span></label>
                             <input type="color" class="haden" id="shapeColor" value="#ff0000" onchange="changeShapeColor()"/>
+                            <div id="colorShapesButton" class="Edit"><a>Edit</a><span>لون الصور</span></div>
                             <div onclick="changeColor()" class="Edit"><a>Edit</a><span>لون الخلفية</span></div>
                             <g></g>
                             <label for="shapeOpacity" class="Edit"><a><input type="range" id="shapeOpacity" min="0" max="1" step="0.01" value="1" onchange="changeShapeOpacity()"/></a><span>شفافية الشكل</span></label>
@@ -299,7 +300,69 @@ function maximizeWindow(option) {
                     <div class="op">
                         <button class="flex button1 v zo" id="toggleBtn1"><ion-icon name="shapes-outline"></ion-icon></button>
                         <!-- 1 -->
-                        <div class="history-div box" id="box1"><div id="shapesContainer"></div></div>
+                        <div class="history-div box" id="box1">
+                            <xo>الأشكال</xo>
+                            <div id="shapesContainer"></div>
+                            <div class="z shapes-container ww" style="display: none;">
+                                <img class="shape-image" title="معين" src="image2/e1.png" alt="">
+                                <img class="shape-image" title="خماسي" src="image2/e2.png" alt="">
+                                <img class="shape-image" title="بيضاوي" src="image2/e3.png" alt="">
+                                <img class="shape-image" title="مربع" src="image2/e4.jpg" alt="">
+                                <img class="shape-image" title="نجمة" src="image2/e5.png" alt="">
+                                <img class="shape-image" title="ثماني" src="image2/e6.png" alt="">
+                                <img class="shape-image" title="سداسي" src="image2/e7.png" alt="">
+                                <img class="shape-image" title="دائرة" src="image2/e8.png" alt="">
+                                <img class="shape-image" title="هلال" src="image2/e9.png" alt="">
+                                <img class="shape-image" title="مستطيل" src="image2/e10.png" alt="">
+                                <img class="shape-image" title="مثل" src="image2/e11.png" alt="">
+                            </div>
+                            <xo>اشخاص</xo>
+                            <div class="z shapes-container">
+                                <img class="shape-image" src="image2/1.png" alt="">
+                                <img class="shape-image" src="image2/2.png" alt="">
+                                <img class="shape-image" src="image2/3.png" alt="">
+                                <img class="shape-image" src="image2/4.png" alt="">
+                                <img class="shape-image" src="image2/5.png" alt="">
+                                <img class="shape-image" src="image2/6.png" alt="">
+                                <img class="shape-image" src="image2/7.png" alt="">
+                                <img class="shape-image" src="image2/11.png" alt="">
+                                <img class="shape-image" src="image2/16.png" alt="">
+                            </div>
+                            <xo>إطارت</xo>
+                            <div class="z shapes-container xx3">
+                                <img class="shape-image" src="image2/8.png" alt="">
+                                <img class="shape-image" src="image2/9.png" alt="">
+                                <img class="shape-image" src="image2/10.png" alt="">
+                                <img class="shape-image" src="image2/17.png" alt="">
+                                <img class="shape-image" src="image2/18.png" alt="">
+                                <img class="shape-image" src="image2/19.png" alt="">
+                                <img class="shape-image" src="image2/32.png" alt="">
+                                <img class="shape-image" src="image2/33.png" alt="">
+                                <img class="shape-image" src="image2/34.png" alt="">
+                                <img class="shape-image" src="image2/35.png" alt="">
+                                <img class="shape-image" src="image2/36.png" alt="">
+                                <img class="shape-image" src="image2/37.png" alt="">
+                            </div>
+                            <xo>Emoji</xo>
+                            <div class="z shapes-container ww">
+                                <img class="shape-image" src="image2/12.png" alt="">
+                                <img class="shape-image" src="image2/13.png" alt="">
+                                <img class="shape-image" src="image2/14.png" alt="">
+                                <img class="shape-image" src="image2/15.png" alt="">
+                                <img class="shape-image" src="image2/20.webp" alt="">
+                                <img class="shape-image" src="image2/21.webp" alt="">
+                                <img class="shape-image" src="image2/22.webp" alt="">
+                                <img class="shape-image" src="image2/23.png" alt="">
+                                <img class="shape-image" src="image2/24.png" alt="">
+                                <img class="shape-image" src="image2/25.png" alt="">
+                                <img class="shape-image" src="image2/26.png" alt="">
+                                <img class="shape-image" src="image2/27.png" alt="">
+                                <img class="shape-image" src="image2/28.png" alt="">
+                                <img class="shape-image" src="image2/29.png" alt="">
+                                <img class="shape-image" src="image2/30.png" alt="">
+                                <img class="shape-image" src="image2/31.png" alt="">
+                            </div>
+                        </div>
                     </div>
                 
                     <div class="op">
@@ -440,6 +503,7 @@ document.getElementById('upload').addEventListener('change', function (e) {
 
 // تمكين سحب وإفلات الصورة
 const canvasContainer = document.getElementById('canvas-container');
+const shapesContainer = document.getElementById('.shapesContainer');
 
 // إضافة حدث السحب
 canvasContainer.addEventListener('dragover', function (e) {
@@ -776,12 +840,12 @@ if (activeObject) {
 
     // إنشاء الأشكال
     function initializeShapes() {
-        const shapesContainer = document.getElementById('shapesContainer');
-        const shapes = [
-             new fabric.Circle({ radius: 15, fill: 'rgb(95 99 104)' }), // دائرة
+            const shapesContainer = document.querySelector('.shapes-container'); // استخدم class بدلاً من id
+            const shapes = [
+    new fabric.Circle({ radius: 15, fill: 'rgb(95 99 104)' }), // دائرة
     new fabric.Rect({ width: 30, height: 30, fill: 'rgb(95 99 104)' }), // مربع
     new fabric.Triangle({ width: 30, height: 30, fill: 'rgb(95 99 104)' }), // مثلث
-    new fabric.Ellipse({ rx: 15, ry: 15, fill: 'rgb(95 99 104)' }), // بيضاوي
+    new fabric.Ellipse({ rx: 15, ry: 10, fill: 'rgb(95 99 104)' }), // بيضاوي
     new fabric.Polygon([{ x: 0, y: 0 }, { x: 30, y: 0 }, { x: 15, y: 30 }], { fill: 'rgb(95 99 104)' }), // مثلث مائل
     new fabric.Polygon([{ x: 0, y: 0 }, { x: 15, y: 0 }, { x: 7.5, y: 22.5 }], { fill: 'rgb(95 99 104)' }), // مثلث صغير
     new fabric.Polygon([{ x: 0, y: 0 }, { x: 22.5, y: 0 }, { x: 11.25, y: 11.25 }], { fill: 'rgb(95 99 104)' }), // مثلث مائل آخر
@@ -789,8 +853,6 @@ if (activeObject) {
     new fabric.Polygon([{ x: 7.5, y: 7.5 }, { x: 30, y: 10 }, { x: 22.5, y: 30 }], { fill: 'rgb(95 99 104)' }), // مثلث مختلف
     new fabric.Rect({ width: 30, height: 30, fill: 'rgb(95 99 104)' }), // مستطيل
     new fabric.Circle({ radius: 15, fill: 'rgb(95 99 104)' }), // دائرة أخرى
-
-    // الأشكال الجديدة:
     new fabric.Polygon([{ x: 15, y: 0 }, { x: 18, y: 7.5 }, { x: 30, y: 7.5 }, { x: 21, y: 12.5 }, { x: 24, y: 20 }, { x: 15, y: 15 }, { x: 6, y: 20 }, { x: 9, y: 12.5 }, { x: 0, y: 7.5 }, { x: 12, y: 7.5 }], { fill: 'rgb(95 99 104)' }), // نجم
     new fabric.Polygon([{ x: 10, y: 0 }, { x: 30, y: 15 }, { x: 15, y: 25 }, { x: 0, y: 15 }], { fill: 'rgb(95 99 104)' }), // شكل رباعي مائل
     new fabric.Polygon([{ x: 0, y: 0 }, { x: 10, y: 10 }, { x: 5, y: 20 }, { x: 0, y: 15 }], { fill: 'rgb(95 99 104)' }), // شبه منحرف
@@ -799,28 +861,69 @@ if (activeObject) {
     new fabric.Polygon([{ x: 0, y: 0 }, { x: 5, y: 20 }, { x: 25, y: 20 }, { x: 30, y: 0 }], { fill: 'rgb(95 99 104)' }), // شكل مائل آخر
     new fabric.Polygon([{ x: 15, y: 0 }, { x: 18, y: 5 }, { x: 30, y: 5 }, { x: 20, y: 12 }, { x: 22, y: 20 }, { x: 15, y: 15 }], { fill: 'rgb(95 99 104)' }), // شكل متعدد الأضلاع
     new fabric.Rect({ width: 30, height: 15, fill: 'rgb(95 99 104)' }), // مستطيل صغير
-    new fabric.Line([0, 0, 15, 30], { stroke: 'rgb(95 99 104)' }),
-        ];
+    new fabric.Line([0, 0, 15, 30], { stroke: 'rgb(95 99 104)' }), // خط
+    new fabric.Polygon([{ x: 0, y: 0 }, { x: 10, y: 0 }, { x: 15, y: 20 }, { x: 25, y: 20 }, { x: 30, y: 0 }], { fill: 'rgb(95 99 104)' }), // شكل سداسي
+];
 
-        shapes.forEach(shape => {
-            const previewCanvas = document.createElement('canvas');
-            previewCanvas.width = 30;
-            previewCanvas.height = 30;
-            previewCanvas.className = 'shape-preview';
-            const previewCtx = new fabric.StaticCanvas(previewCanvas);
-            previewCtx.add(shape);
+shapes.forEach(shape => {
+    // إنشاء عنصر canvas جديد لمعاينة الشكل
+    const previewCanvas = document.createElement('canvas');
+    previewCanvas.width = 30;
+    previewCanvas.height = 30;
+    previewCanvas.className = 'shape-preview';
 
-            previewCanvas.addEventListener('click', () => {
-                const clone = fabric.util.object.clone(shape);
-                clone.set({ left: 100, top: 100 });
-                canvas.add(clone);
-                saveState();
-            });
+    // استخدام fabric.StaticCanvas لإنشاء معاينة ثابته لكل شكل
+    const previewCtx = new fabric.StaticCanvas(previewCanvas);
+    previewCtx.add(shape);
 
-            shapesContainer.appendChild(previewCanvas);
+    // إضافة حدث click إلى canvas المعاين
+    previewCanvas.addEventListener('click', () => {
+        // استنساخ الشكل عندما يتم النقر عليه
+        const clone = fabric.util.object.clone(shape);
+        clone.set({ left: 100, top: 100 });
+        canvas.add(clone); // إضافة الشكل إلى الـ canvas الرئيسي
+        saveState(); // حفظ الحالة
+    });
+
+    // إضافة canvas المعاينة إلى العنصر الذي يحمل id="shapesContainer"
+    document.getElementById('shapesContainer').appendChild(previewCanvas);
+});
+}
+
+
+// إضافة الصور إلى canvas عند النقر
+document.querySelectorAll('.shape-image').forEach(img => {
+    img.addEventListener('click', () => {
+        fabric.Image.fromURL(img.src, function (imgObj) {
+            // تحديد حجم الصورة
+            imgObj.scaleToWidth(200); // عرض الصورة سيكون 100 بكسل
+            imgObj.scaleToHeight(200); // أو استخدم هذا لتحديد ارتفاع الصورة
+            
+            // تحديد الموقع الأولي للصورة على الـ canvas
+            imgObj.set({ left: 100, top: 100 });
+
+            // إضافة الصورة إلى الـ canvas
+            canvas.add(imgObj);
+
+            // حفظ الحالة (إذا كنت تستخدم هذه الوظيفة لحفظ التعديلات)
+            saveState();
         });
-    }
+    });
+});
 
+
+// تحديد الزر
+const colorShapesButton = document.getElementById('colorShapesButton');
+
+// إضافة حدث للنقر على الزر
+colorShapesButton.addEventListener('click', () => {
+    // استهداف الصور التي تحتوي على الكلاس "shape-image"
+    document.querySelectorAll('.shape-image').forEach(img => {
+        // تغيير لون الخلفية أو الحدود حسب رغبتك
+        img.style.border = '2px solid red'; // مثال لتغيير اللون إلى أحمر
+        img.style.filter = 'hue-rotate(90deg)'; // تغيير ألوان الصورة نفسها
+    });
+});
 
 
     let isAutoSaveEnabled = false; // حالة الحفظ التلقائي
